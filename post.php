@@ -1,4 +1,4 @@
-      <div class="px-4 py-4 m-0 lg:ml-96 lg:mr-96 transition bg-white shadow-none md:shadow border-b border-6" id="#normalpost">
+      <div class="px-4 py-4 hidden m-0 lg:ml-96 lg:mr-96 transition bg-white shadow-none md:shadow border-b border-6" id="normalpost">
          <div class="flex">
 		 <div class="relative" x-data="{ open: false }">
             <div class="w-10 h-10 mr-3 font-bold text-center text-white bg-gray-700 bg-center bg-cover border-4 border-gray-500 rounded-full cursor-pointer hover:bg-gray-600"
@@ -76,22 +76,22 @@
 
 
 		 
-                <div class="flex w-full justify-start mb-4 ">		 
+                <div class="flex w-full justify-start mb-4  ">		 
 				
 									
                     <div class="flex mt-1 flex-row-reverse pt-2 pr-5">
-					                        <span class="bg-white hover:bg-gray-200 border w-8 h-8 px-2 py-2 text-center rounded-full text-gray-400 cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="14px" viewBox="0 0 24 24" stroke="currentColor">
+					                        <span class=" transition focus:opacity-50 hover:bg-gray-200  w-8 h-8 px-2 py-2 text-center rounded-full text-gray-400 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"  viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                             </svg>
                         </span>
-                        <span class="bg-red-100 hover:bg-red-200 h-8 w-8 px-2 py-2 text-center rounded-full text-red-400 cursor-pointer mr-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="14px" viewBox="0 0 24 24" stroke="currentColor">
+                        <span class=" transition hover:bg-red-200 focus:opacity-50 h-8 w-8 px-2 py-2 text-center rounded-full text-red-400 cursor-pointer mr-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"  viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                             </svg>
                         </span>
-                        <span class="bg-red-600 transition focus:opacity-50 hover:bg-red-700 h-8 px-2 w-8 py-2 text-center rounded-full text-gray-100 cursor-pointer mr-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="14px" viewBox="0 0 24 24" stroke="currentColor">
+                        <span class=" transition hover:bg-red-800 h-8 px-2 w-8 py-2 text-center rounded-full text-gray-400 cursor-pointer mr-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"  viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                             </svg>
                         </span>

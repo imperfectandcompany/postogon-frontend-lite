@@ -20,7 +20,7 @@ function post($amt)
 <html>
    <head>
       <meta charset="utf-8"/>
-      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover, minimal-ui">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, minimal-ui"/>
       <title>Home - Postogon</title>
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -42,6 +42,8 @@ function post($amt)
     .post {
         padding-left: max(12px, env(safe-area-inset-left));
         padding-right: max(12px, env(safe-area-inset-right));
+		height: calc(100% + (var(--safe-area-inset-top) + var(--safe-area-inset-bottom)));
+
     }
 }
 
@@ -78,6 +80,9 @@ main {
   margin-bottom: calc(var(--footer-height, 3.5rem));
 }
 
+.disabledbltap {
+  touch-action: manipulation !important;
+}
 
 .like {
 	display: inline-block;
@@ -153,7 +158,7 @@ main {
 	}
 }
 
-/* Set initial opacity and attach the unlike animation  */
+
 .unliked .like-icon-state {
 	opacity: 0;
 	animation: 1.2s unlike-animation both cubic-bezier(0.45, 0.05, 0.55, 0.95);
@@ -183,7 +188,7 @@ main {
 	}
 }
 
-/* Pop a small animation of the background on like */
+
 .liked {
 	background: #FFF;
 	animation: 1.2s liked-bg-animation both;
@@ -213,7 +218,7 @@ main {
 	}
 }
 
-/* Pop a more discreet animation of the background on unlike */
+
 .unliked {
 	animation: 1.2s unliked-bg-animation both;
 }
@@ -242,7 +247,6 @@ main {
 	}
 }
 
-/* Pseudo el for our ring animation */
 .like::before {
 	content: "";
 	display: block;
@@ -256,7 +260,6 @@ main {
 	transform: scale(0);
 }
 
-/* Apply animation to the ring el */
 .liked::before {
 	animation: 1.2s bg-ring-animation both;
 }
@@ -313,9 +316,11 @@ main {
 	}
 }
 
-/* eof */
+[x-cloak=""] { display: none; }
 
-
+@media screen and (max-width: 768px) {
+    [x-cloak="mobile"] { display: none; }
+}
 
 
 
@@ -353,21 +358,27 @@ updateRealViewportDimensions()
  })
 </script> 
 <script>
-
+var mobile = window.matchMedia( "(max-width: 640px)" );
 var prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
   var currentScrollPos = window.pageYOffset;
   if (prevScrollpos > currentScrollPos) {
     document.getElementById("header").style.top = "0";	
 	
-  } else if (document.getElementById("header").classList.contains('headeropen')){
+  } else if (document.getElementById("header").classList.contains('headeropen') && mobile.matches){
     document.getElementById("header").style.top = "-215px";
-        } else {
-    document.getElementById("header").style.top = "-65px";
+  } else if (document.getElementById("header").classList.contains('headeropen')){
+    document.getElementById("header").style.top = "0px";
+  } else {
+	      document.getElementById("header").style.top = "-65px";
 
   }
   prevScrollpos = currentScrollPos;
 }
+</script>
+
+<script>
+
 </script>
    
    <body>
@@ -386,7 +397,7 @@ window.onscroll = function() {
          </div>
 
 	  
-<div x-show="open" @click.away="open = false"  x-transition:enter="transition ease-in duration-100" x-transition:enter-start="opacity-0 transform translate-y-0" x-transition:enter-end="opacity-100 transform -translate-y-3" x-transition:leave="transition ease-in-out duration-100" x-transition:leave-end="opacity-0 transform -translate-y-3" class="post">   
+<div x-cloak x-show="open" @click.away="open = false"  x-transition:enter="transition ease-in duration-100" x-transition:enter-start="opacity-0 transform translate-y-0" x-transition:enter-end="opacity-100 transform -translate-y-3" x-transition:leave="transition ease-in-out duration-100" x-transition:leave-end="opacity-0 transform -translate-y-3" class="post">   
 	  <div x-data="{ count: 0 } " x-init="count = $refs.countme.value.length" class="px-4 py-4 transition bg-white border-b">
          <div class="flex flex-col">
             <div class="flex">
@@ -420,10 +431,10 @@ window.onscroll = function() {
    </header>	  
 
 
-	  <main class="flex-1 post" style="-webkit-overflow-scrolling:touch">
+	  <main class="flex-1 post disabledbltap" style="-webkit-overflow-scrolling:touch">
 	<?php post(5); ?>	
 	      <div class="text-center mt-10">
-        <button class="border border-gray-300 text-gray-400 px-4 py-2 rounded-full transition focus:outline-none  hover:bg-gray-600 focus:opacity-0 hover:text-white">Show More</button>
+        <button class="border border-gray-300 text-gray-400 px-4 py-2 rounded-full transition focus:outline-none animate-bounce hover:bg-gray-600 focus:opacity-0 hover:text-white">Show More</button>
       </div>
 		</main>
 
