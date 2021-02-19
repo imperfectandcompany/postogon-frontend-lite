@@ -1,8 +1,8 @@
-      <div class="px-4 py-4 transition bg-white border-b">
+      <div class="px-4 py-4 m-0 lg:ml-96 lg:mr-96 transition bg-white shadow-none md:shadow border-b border-6" id="#normalpost">
          <div class="flex">
 		 <div class="relative" x-data="{ open: false }">
             <div class="w-10 h-10 mr-3 font-bold text-center text-white bg-gray-700 bg-center bg-cover border-4 border-gray-500 rounded-full cursor-pointer hover:bg-gray-600"
-			@click="open = !open" @click.away="open = false" :class="{'border-indigo-700 transform transition duration-300 ': open}"
+			@click="open = !open" @click.away="open = false" :class="{'border-red-400 bg-red-200 text-red-400 hover:bg-red-300 transform transition duration-300 ': open}"
 			x-transition:enter-end="transform opacity-100 scale-100"
 			x-transition:leave="transition ease-in duration-75"
 			x-transition:leave-start="transform opacity-100 scale-100"
@@ -65,28 +65,67 @@
          </div>
          <div class="mt-4 mb-4">
             <p class="ml-5 mr-5 text-sm antialiased break-words sm:subpixel-antialiased md:antialiased"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span></p>
-            <div class="flex flex-row-reverse mt-1">
-               <p class="text-xs text-gray-400 transition hover:text-gray-500">Yale '22, Studying Engineering 💻</p>
-            </div>
          </div>
-         <div class="flex flex-row-reverse items-center mt-4">
-            <div class="mx-auto text-sm font-bold transition duration-200 border-none cursor-pointer">
-               <svg class="w-4 h-4" fill="none" stroke="#000000" viewBox="0 0 24 24">
-                  <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-               </svg>
-               <span class="">95</span>
+		 
+            <div class="flex flex-row-reverse">
+               <p class="text-xs text-gray-400 transition hover:text-gray-500 mb-4 mr-5">Yale '22, Studying Engineering 💻</p>
             </div>
-            <div class="mx-auto text-sm font-bold transition duration-200 border-none cursor-pointer">
-               <svg class="w-4 h-4" fill="#000000" viewBox="0 0 24 24">
-                  <path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 11v4h2.953l1.594 2h-6.547v-6h-2l3-4 3 4h-2zm6 2v-4h-2.922l-1.594-2h6.516v6h2l-3 4-3-4h2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-               </svg>
-               <span class="">24</span>
-            </div>
-            <div class="mx-auto text-sm font-bold transition duration-200 border-none cursor-pointer">
-               <svg class="w-4 h-4" fill="none" stroke="#000000" viewBox="0 0 24 24">
-                  <path d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-               </svg>
-               <span class="">12</span>
-            </div>
-         </div>
+		 
+
+		 
+
+
+		 
+                <div class="flex w-full justify-start mb-4 ">		 
+				
+									
+                    <div class="flex mt-1 flex-row-reverse pt-2 pr-5">
+					                        <span class="bg-white hover:bg-gray-200 border w-8 h-8 px-2 py-2 text-center rounded-full text-gray-400 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="14px" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                            </svg>
+                        </span>
+                        <span class="bg-red-100 hover:bg-red-200 h-8 w-8 px-2 py-2 text-center rounded-full text-red-400 cursor-pointer mr-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="14px" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                            </svg>
+                        </span>
+                        <span class="bg-red-600 transition focus:opacity-50 hover:bg-red-700 h-8 px-2 w-8 py-2 text-center rounded-full text-gray-100 cursor-pointer mr-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="14px" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                        </span>
+                    </div>
+				
+				
+                    <div class="flex justify-end w-full mt-1 pt-2 pl-5">
+
+<button x-data="{
+  state: 'Unliked',
+  usedKeyboard: false,
+  async updateState(to) {
+      this.state = 'Saving'
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      this.state = to
+  }
+}"
+:class="{
+  'like unliked': state === 'Unliked',
+  'like saving': state === 'Saving',
+  'like liked': state === 'Liked',
+  'focus:outline-none': !usedKeyboard
+}"
+@click="updateState(state === 'Unliked' ? 'Liked' : 'Unliked')" @keydown.window.tab="usedKeyboard = true">
+  <span class="like-icon like-icon-state" aria-label="state" x-text="state" aria-live="polite">Unliked</span>
+</button>					
+						
+
+                    </div>
+					
+
+
+
+					
+					</div>
+		 
       </div>
