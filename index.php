@@ -383,8 +383,8 @@ window.onscroll = function() {
          <div class="bg-white">
             <div class="flex justify-end flex-shrink-0 px-6 py-4 border-b border-gray-300">
 			<div class="flex mr-auto">
-               <img class="h-8 w-8 " style="filter:brightness(0.1)" src="http://postogon.com/home/assets/logo.svg" alt="postogon logo"/>
-			   <h1 class="px-6 text-xl font-semibold">Home</h1>
+               <a href="./"><img class="h-8 w-8 " style="filter:brightness(0.1)" src="http://postogon.com/home/assets/logo.svg" alt="postogon logo"/></a>
+			   <h1 class="px-6 text-xl font-semibold cursor-pointer">Home</h1>
 			   </div>
 			   <div class="flex ">
                <button @click="open = !open" :aria-expanded="open ? 'true' : 'false'" :class="{'font-semibold': open, 'active': open}" class="p-1 px-2 font-semibold text-white transition duration-200 bg-red-500 rounded-md cursor-pointer focus:outline-none" aria-expanded="false">
@@ -393,6 +393,7 @@ window.onscroll = function() {
                      <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                   </svg>
                </button>
+
 			   </div>
             </div>
          </div>
@@ -414,22 +415,12 @@ window.onscroll = function() {
                      <div class="my-1 select-none">?</div>
                   </div>
                </div>
-               <textarea id="text"  class="w-full text-lg rounded-md h-6  dark:bg-dark transition p-2 bg-white  resize-none dark:text-light focus:outline-none  focus:ring-opacity-10 char-limiter" maxlength="280" placeholder="What's Poppin'." rows="3" spellcheck="true" x-on:keyup="count = $refs.countme.value.length" x-ref="countme" style="height:44px;overflow-y:hidden;"></textarea>
+               <textarea id="text" name="post" class="w-full text-lg rounded-md h-6  dark:bg-dark transition p-2 bg-white  resize-none dark:text-light focus:outline-none  focus:ring-opacity-10 char-limiter" maxlength="280" placeholder="What's Poppin'." rows="3" spellcheck="true" x-on:keyup="count = $refs.countme.value.length" x-ref="countme" style="height:44px;overflow-y:hidden;"></textarea>
             </div>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
             <div class="flex m-2 text-gray-500 icons ml-14">
 			
 
-
-
-			
-               <svg class="p-1 mr-2 h-8 w-8 transition duration-200 rounded-full text-gray-500 bg-white hover:bg-gray-200 rounded-full cursor-pointer focus:outline-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                  <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-               </svg>
-               <svg class="p-1 mr-2 h-8 w-8 transition duration-200 rounded-full text-gray-500 bg-white hover:bg-gray-200 rounded-full cursor-pointer focus:outline-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-               </svg>
 			   
 
       
@@ -457,36 +448,34 @@ function imageViewer() {
 			   </script>
 				
 			   
-<div x-data="imageViewer()">
+<div class="flex" x-data="imageViewer()">
     <!-- Image file selector -->
-    <template x-if="!imageUrl">	
+
     <input name="photo" id="fileInput" accept="image/*" class="hidden" type="file"  @change="fileChosen">
-	                                        <div>  <label  @click="open = !open"
-                        for="fileInput" x-data="{ open: false }"
-                        type="button"  :class="{'hidden': open}"
+	                                         <label  
+                        for="fileInput"
+                        type="button"
                         class="p-1 mr-2 h-8 w-8 transition duration-200 rounded-full text-gray-500 bg-white hover:bg-gray-200 rounded-full cursor-pointer focus:outline-none"
                       >
 					  
-               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+               <svg fill="none" stroke="rgba(107, 114, 128)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                </svg>
                       </label>
-					                      </div>
+					                     
 	</input>
-    </template>
 
 
 	
     <!-- Show the image -->
     <template x-if="imageUrl">
 	
-		<div class=" w-auto mb-2 border rounded-lg relative bg-gray-100 mb-4 shadow-inset overflow-hidden">
+		<div class=" w-auto mb-2 ml-3 border rounded-lg relative bg-gray-100 mb-4 shadow-inset ">
       <img :src="imageUrl" 
            class="object-cover w-full" 
            style="width: 100px; height: 100px;"
       >
-	  	<div @click="{imageUrl = '';
-		open = !open;}" class="shadow cursor-pointer absolute top-0 right-0 p-2 mr-2 mt-2 rounded-full bg-gray-600">
+	  	<div @click="imageUrl = ''" class="shadow cursor-pointer absolute top-0 right-0 p-2 mr-2 mt-2 rounded-full bg-gray-600">
 											<svg class="h-6 w-6 text-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
 											  </svg>								  
@@ -510,8 +499,8 @@ function imageViewer() {
                <div class="ml-auto text-xs font-semibold text-gray-400 count"><span x-html="count">0</span> / <span x-html="$refs.countme.maxLength">280</span></div>
             </div>
             <div class="flex flex-row-reverse">
-               <button id="submitpost" class="p-1 px-4 font-semibold text-white transition bg-red-500 rounded-md select-none cursor-not-allowed focus:outline-none">Post</button>
-            </div>
+               <button id="submitpost" class="p-1 px-4 font-semibold text-white transition bg-red-500 rounded-md select-none cursor-not-allowed focus:outline-none" disabled>Post</button>   
+			</div>
 			</form>
          </div>
       </div>
@@ -534,7 +523,7 @@ function imageViewer() {
 <?php post(5);?>
 <div
 	x-data="noticesHandler()"
-	class="fixed inset-0 flex flex-col-reverse left-4 bottom-16 items-start justify-start"
+	class="fixed inset-0 flex flex-col-reverse left-4 bottom-16 z-2 items-start justify-start"
 	@notice.window="add($event.detail)"
 	style="pointer-events:none">
 	<template x-for="notice of notices" :key="notice.id">
@@ -545,7 +534,7 @@ function imageViewer() {
 			x-transition:enter-end="transform opacity-100"
 			x-transition:leave="transition ease-out duration-500"
 			x-transition:leave-start="transform translate-x-0 opacity-100"
-			x-transition:leave-end="transform translate-x-full opacity-0"
+			x-transition:leave-end="transform -translate-x-full opacity-0"
 			@click="remove(notice.id)"
 			class="rounded mb-4 mr-6 w-56 bg-white text-white h-16 flex items-center justify-center shadow-lg font-bold text-lg cursor-pointer"
 			:class="{
@@ -595,7 +584,7 @@ function noticesHandler() {
 
 
 
-	  <footer class="bg-white border-t border-gray-300 inset-x-0 bottom-0 text-center flex lg:hidden" style="touch-action: none;" id="footer">
+	  <footer class="bg-white border-t border-gray-300 inset-x-0 bottom-0 text-center z-50 flex lg:hidden" style="touch-action: none;" id="footer">
 <a href="." class="flex flex-col flex-grow items-center justify-center
 			overflow-hidden whitespace-no-wrap text-sm transition-colors
 			duration-100 ease-in-out hover:bg-gray-200 focus:text-orange-500">
@@ -660,12 +649,12 @@ function noticesHandler() {
         if ($(this).val() !== "") {
             $("#submitpost").removeClass("p-1 px-4 cursor-not-allowed font-semibold text-white transition transition-colors bg-red-500 rounded-md btn duration-200l text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-darker focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker");
             $("#submitpost").addClass("p-1 px-4 font-semibold text-white transition transition-colors bg-red-500 rounded-md cursor-pointer btn duration-200l text-primary-lighter bg-primary-100 hover:text-primary hover:bg-primary dark:hover:text-light dark:hover:bg-primary-dark dark:bg-darker focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker");
- 			$("#submitpost").element.disabled = true;        
+			document.getElementById("submitpost").disabled = false;        
 		}
         else {
             $("#submitpost").removeClass("p-1 px-4 font-semibold text-white transition transition-colors bg-red-500 rounded-md cursor-pointer btn duration-200l text-primary-lighter bg-primary-100 hover:text-primary hover:bg-primary dark:hover:text-light dark:hover:bg-primary-dark dark:bg-darker focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker");
             $("#submitpost").addClass("p-1 px-4 cursor-not-allowed font-semibold text-white transition transition-colors bg-red-500 rounded-md btn duration-200l text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-darker focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker");
-			$("#submitpost").element.disabled = false;        
+			document.getElementById("submitpost").disabled = true;        
 		}
     });	
 </script>
