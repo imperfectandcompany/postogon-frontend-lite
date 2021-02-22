@@ -30,11 +30,10 @@ function post($amt)
          href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
          rel="stylesheet"
          />
+<script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@1.x.x/dist/alpine-clipboard.js"></script>		 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>		 
-      <script src="scripts/main.js"></script>
       <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
       <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
-      <link href="build/css/tailwind.css" rel="stylesheet"/>
       <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.5.x/dist/component.min.js"></script>
       <script defer src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js"></script>
 	  <style>
@@ -67,7 +66,7 @@ header {
 }
 
 footer {
-  position: sticky;
+  position: fixed;
   overflow-y: scroll;
   bottom: 0;
   height: 3.5rem;
@@ -316,16 +315,17 @@ main {
 	}
 }
 
-[x-cloak=""] { display: none; }
-
-@media screen and (max-width: 768px) {
-    [x-cloak="mobile"] { display: none; }
+[x-cloak] {
+    display: none !important;
 }
+
 
 
 
 	  </style>
    </head>
+
+
 
 <script>
  let root = document.documentElement;
@@ -364,7 +364,6 @@ window.onscroll = function() {
   var currentScrollPos = window.pageYOffset;
   if (prevScrollpos > currentScrollPos) {
     document.getElementById("header").style.top = "0";	
-	
   } else if (document.getElementById("header").classList.contains('headeropen') && mobile.matches){
     document.getElementById("header").style.top = "-215px";
   } else if (document.getElementById("header").classList.contains('headeropen')){
@@ -377,12 +376,9 @@ window.onscroll = function() {
 }
 </script>
 
-<script>
-
-</script>
    
    <body>
-   <div class="flex flex-col">
+   <div class="flex flex-col  bg-opacity-50">
       <header x-data="{ open: false }" :class="{'headeropen': open}" id="header" class="z-10 text-center justify-center" style="touch-action: none;">
          <div class="bg-white">
             <div class="flex justify-between flex-shrink-0 px-6 py-4 border-b border-gray-300">
@@ -397,7 +393,7 @@ window.onscroll = function() {
          </div>
 
 	  
-<div x-cloak x-show="open" @click.away="open = false"  x-transition:enter="transition ease-in duration-100" x-transition:enter-start="opacity-0 transform translate-y-0" x-transition:enter-end="opacity-100 transform -translate-y-3" x-transition:leave="transition ease-in-out duration-100" x-transition:leave-end="opacity-0 transform -translate-y-3" class="post">   
+<div  x-show="open" @click.away="open = false" :class="{'invisible': closed}"  x-transition:enter="transition ease-in duration-100" x-transition:enter-start="opacity-0 transform translate-y-0" x-transition:enter-end="opacity-100 transform -translate-y-3" x-transition:leave="transition ease-in-out duration-100" x-transition:leave-end="opacity-0 transform -translate-y-3" class="post invisible">   
 	  <div x-data="{ count: 0 } " x-init="count = $refs.countme.value.length" class="px-4 py-4 transition bg-white border-b">
          <div class="flex flex-col">
             <div class="flex">
@@ -431,18 +427,82 @@ window.onscroll = function() {
    </header>	  
 
 
+<!-- mobile button for more options -->
+<div class="fixed flex flex-col-reverse w-12 h-12 bg-white z-50 post rounded-full shadow cursor-pointer right-4 bottom-44 p-1 transition-colors duration-200 text-primary-light bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-primary-lighter dark:hover:bg-primary-dark dark:text-light dark:bg-darker md:hidden focus:outline-none focus:ring ">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
+            </svg>
+                            
+    </div>
+
+<!-- main content goes here, in between the header and footer -->
 	  <main class="flex-1 post disabledbltap" style="-webkit-overflow-scrolling:touch">
-	<?php post(5); ?>	
-	      <div class="text-center mt-10">
+<!-- posts -->
+<?php post(5);?>
+<div
+	x-data="noticesHandler()"
+	class="fixed inset-0 flex flex-col-reverse left-4 bottom-16 items-start justify-start"
+	@notice.window="add($event.detail)"
+	style="pointer-events:none">
+	<template x-for="notice of notices" :key="notice.id">
+		<div
+			x-show="visible.includes(notice)"
+			x-transition:enter="transition ease-in duration-200"
+			x-transition:enter-start="transform opacity-0 translate-y-2"
+			x-transition:enter-end="transform opacity-100"
+			x-transition:leave="transition ease-out duration-500"
+			x-transition:leave-start="transform translate-x-0 opacity-100"
+			x-transition:leave-end="transform translate-x-full opacity-0"
+			@click="remove(notice.id)"
+			class="rounded mb-4 mr-6 w-56 bg-white text-white h-16 flex items-center justify-center shadow-lg font-bold text-lg cursor-pointer"
+			:class="{
+				'bg-white text-black text-gray-900': notice.type === 'copy',
+				'bg-white': notice.type === 'saved',
+				'bg-blue-500 text-white': notice.type === 'download',
+				'bg-red-500 text-white': notice.type === 'like',
+			 }"
+			style="pointer-events:all"
+			x-text="notice.text">
+		</div>
+	</template>
+</div>
+	      <div class="text-center mt-10 mb-44">
         <button class="border border-gray-300 text-gray-400 px-4 py-2 rounded-full transition focus:outline-none animate-bounce hover:bg-gray-600 focus:opacity-0 hover:text-white">Show More</button>
       </div>
 		</main>
-
-	  
-
-	  <footer class="bg-white border-t border-gray-300 inset-x-0 bottom-0 text-center flex lg:hidden" style="touch-action: none;">
-
+<script>
+function noticesHandler() {
+	return {
+		notices: [],
+		visible: [],
+		add(notice) {
+			notice.id = Date.now()
+			this.notices.push(notice)
+			this.fire(notice.id)
+		},
+		fire(id) {
+			this.visible.push(this.notices.find(notice => notice.id == id))
+			const timeShown = 2000 * this.visible.length
+			setTimeout(() => {
+				this.remove(id)
+			}, timeShown)
+		},
+		remove(id) {
+			const notice = this.visible.find(notice => notice.id == id)
+			const index = this.visible.indexOf(notice)
+			this.visible.splice(index, 1)
+		},
 		
+	};
+}
+
+</script>
+
+
+
+
+
+	  <footer class="bg-white border-t border-gray-300 inset-x-0 bottom-0 text-center flex lg:hidden" style="touch-action: none;" id="footer">
 <a href="." class="flex flex-col flex-grow items-center justify-center
 			overflow-hidden whitespace-no-wrap text-sm transition-colors
 			duration-100 ease-in-out hover:bg-gray-200 focus:text-orange-500">
