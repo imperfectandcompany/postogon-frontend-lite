@@ -1,4 +1,9 @@
 <?php
+function createpost()
+{
+    include_once("createpost.php");
+}
+
 function post($amt)
 {
     $i = 0;
@@ -30,6 +35,7 @@ function post($amt)
          href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
          rel="stylesheet"
          />
+  <script src="svg-inject.min.js"></script>		 
 <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@1.x.x/dist/alpine-clipboard.js"></script>		 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>		 
       <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
@@ -48,7 +54,7 @@ function post($amt)
 
 :root {
   --header-height: 65px;
-  --headeropen-height: 215px;  
+  --headeropen-height: 230px;  
   --footer-height: 3.5rem;
 }
 
@@ -61,8 +67,8 @@ header {
 }
 
 .headeropen {
-  height: 215px;
-  height: var(--headeropen-height, 215px);
+  height: 230px;
+  height: var(--headeropen-height, 230px);
 }
 
 footer {
@@ -77,10 +83,6 @@ main {
   margin-bottom: 3.5rem;
   margin-bottom: calc(3.5rem);
   margin-bottom: calc(var(--footer-height, 3.5rem));
-}
-
-.disabledbltap {
-  touch-action: manipulation !important;
 }
 
 .like {
@@ -320,7 +322,9 @@ main {
 }
 
 
-
+body {
+  touch-action: manipulation;
+}
 
 	  </style>
    </head>
@@ -342,6 +346,7 @@ updateRealViewportDimensions()
    "fullscreenchange",
    "fullscreenerror",
    "touchcancel",
+   "touchaction",   
    "touchend",
    "touchmove",
    "touchstart",
@@ -363,9 +368,9 @@ var prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
   var currentScrollPos = window.pageYOffset;
   if (prevScrollpos > currentScrollPos) {
-    document.getElementById("header").style.top = "0";	
+    document.getElementById("header").style.top = "0px";	
   } else if (document.getElementById("header").classList.contains('headeropen') && mobile.matches){
-    document.getElementById("header").style.top = "-215px";
+    document.getElementById("header").style.top = "-230px";
   } else if (document.getElementById("header").classList.contains('headeropen')){
     document.getElementById("header").style.top = "0px";
   } else {
@@ -376,149 +381,100 @@ window.onscroll = function() {
 }
 </script>
 
+
    
    <body>
-   <div class="flex flex-col">
-      <header x-data="{ open: false }" :class="{'headeropen': open}" id="header" class="z-10 text-center justify-center" style="touch-action: none;">
-         <div class="bg-white">
-            <div class="flex justify-end flex-shrink-0 px-6 py-4 border-b border-gray-300">
-			<div class="flex mr-auto">
-               <a href="./"><img class="h-8 w-8 " style="filter:brightness(0.1)" src="http://postogon.com/home/assets/logo.svg" alt="postogon logo"/></a>
-			   <h1 class="px-6 text-xl font-semibold cursor-pointer">Home</h1>
-			   </div>
-			   <div class="flex ">
-               <button @click="open = !open" :aria-expanded="open ? 'true' : 'false'" :class="{'font-semibold': open, 'active': open}" class="p-1 px-2 font-semibold text-white transition duration-200 bg-red-500 rounded-md cursor-pointer focus:outline-none" aria-expanded="false">
-                  New post
-                  <svg :class="{ 'rotate-180': open }" class="inline-block w-4 h-4 ml-1 transition-transform transform" fill="none" stroke="#FFFFFF" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                     <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                  </svg>
-               </button>
+   <div class="flex flex-col" x-data="setup()" x-init="$refs.loading.classList.add('hidden');">
 
-			   </div>
-            </div>
-         </div>
- 
-                       
-          
-			
-
-
- 			  
-	  
-<div  x-show="open" @click.away="open = false" :class="{'invisible': closed}"  x-transition:enter="transition ease-in duration-100" x-transition:enter-start="opacity-0 transform translate-y-0" x-transition:enter-end="opacity-100 transform -translate-y-3" x-transition:leave="transition ease-in-out duration-100" x-transition:leave-end="opacity-0 transform -translate-y-3" class="post invisible">   
-	  <div x-data="{ count: 0 } " x-init="count = $refs.countme.value.length" class="px-4 py-4 transition bg-white border-b">
-         <div class="flex flex-col">
-		 <form>
-            <div class="flex">
-               <div class="my-auto">
-                  <div class="w-10 h-10 mr-3 font-bold text-center text-white bg-gray-700 bg-center bg-cover border-4 border-gray-500 rounded-full cursor-pointer hover:bg-gray-600" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100">
-                     <div class="my-1 select-none">?</div>
-                  </div>
-               </div>
-               <textarea id="text" name="post" class="w-full text-lg rounded-md h-6  dark:bg-dark transition p-2 bg-white  resize-none dark:text-light focus:outline-none  focus:ring-opacity-10 char-limiter" maxlength="280" placeholder="What's Poppin'." rows="3" spellcheck="true" x-on:keyup="count = $refs.countme.value.length" x-ref="countme" style="height:44px;overflow-y:hidden;"></textarea>
-            </div>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-            <div class="flex m-2 text-gray-500 icons ml-14">
-			
-
-			   
-
-      
-<!-- image preview component -->
-			   <script>
-function imageViewer() {
-  return {
-    imageUrl: '',
-
-    fileChosen(event) {
-      this.fileToDataUrl(event, src => this.imageUrl = src)
-    },	
-
-    fileToDataUrl(event, callback) {
-      if (! event.target.files.length) return
-
-      let file = event.target.files[0],
-          reader = new FileReader()
-
-      reader.readAsDataURL(file)
-      reader.onload = e => callback(e.target.result)
-    },
-  }
-}
-			   </script>
-				
-			   
-<div class="flex" x-data="imageViewer()">
-    <!-- Image file selector -->
-
-    <input name="photo" id="fileInput" accept="image/*" class="hidden" type="file"  @change="fileChosen">
-	                                         <label  
-                        for="fileInput"
-                        type="button"
-                        class="p-1 mr-2 h-8 w-8 transition duration-200 rounded-full text-gray-500 bg-white hover:bg-gray-200 rounded-full cursor-pointer focus:outline-none"
-                      >
-					  
-               <svg fill="none" stroke="rgba(107, 114, 128)" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-               </svg>
-                      </label>
-					                     
-	</input>
-
-
-	
-    <!-- Show the image -->
-    <template x-if="imageUrl">
-	
-		<div class=" w-auto mb-2 ml-3 border rounded-lg relative bg-gray-100 mb-4 shadow-inset ">
-      <img :src="imageUrl" 
-           class="object-cover w-full" 
-           style="width: 100px; height: 100px;"
-      >
-	  	<div @click="imageUrl = ''" class="shadow cursor-pointer absolute top-0 right-0 p-2 mr-2 mt-2 rounded-full bg-gray-600">
-											<svg class="h-6 w-6 text-gray-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-											  </svg>								  
-										</div>
-										</div>
-    </template>
-
-
-</div> 
-			
-			   
-			   
-			   			   
-
-			   
-
-					
-					
-					
-			   
-               <div class="ml-auto text-xs font-semibold text-gray-400 count"><span x-html="count">0</span> / <span x-html="$refs.countme.maxLength">280</span></div>
-            </div>
-            <div class="flex flex-row-reverse">
-               <button id="submitpost" class="p-1 px-4 font-semibold text-white transition bg-red-500 rounded-md select-none cursor-not-allowed focus:outline-none" disabled>Post</button>   
-			</div>
-			</form>
-         </div>
-      </div>
-	  </div>
-   </header>
+        <!-- Loading screen -->		 
+        <div
+                class="fixed inset-0 z-50 flex items-center w-full justify-center animate-pulse text-3xl font-bold bg-white"
+                x-ref="loading"
+        >
+		
+            <img
+                    class="h-32 w-32 mx-auto injectable" 
+                    style="filter:brightness(0.1)"
+                    src="https://postogon.com/home/assets/logo.svg"
+                    alt="postogon logo"/>
+            <div class="h-16 flex items-center mx-auto">Loading.....</div>
+        </div>
+<?php createpost(); ?>
    
+<nav @click.away="isMobileSubMenuOpen = false" x-cloak aria-label="Secondary" :class="{'block': true}" class="block bg-white w-24 fixed flex-col-reverse z-50 flex items-center p-4 rounded-md shadow-lg bottom-64 right-0 md:hidden" x-show="isMobileSubMenuOpen" x-transition:enter="transition duration-200 ease-in-out transform sm:duration-500" x-transition:enter-end="translate-y-0 opacity-100" x-transition:enter-start="translate-x-full opacity-0" x-transition:leave="transition duration-300 ease-in-out transform sm:duration-500" x-transition:leave-end="-translate-y-full opacity-0" x-transition:leave-start="translate-y-0 opacity-100">
+                        <div class="flex space-y-2 flex-col-reverse">
+                            <!-- Notification button -->
+                            <button @click="openNotificationsPanel(); $nextTick(() => { isMobileSubMenuOpen = false })" class="p-2 bg-white transition duration-200 rounded-full focus:outline-none">
+                                <span class="sr-only">Open notifications panel</span>
+                                <svg aria-hidden="true" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="https://www.w3.org/2000/svg">
+                                    <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                </svg>
+                            </button>
 
+                            <!-- Search button -->
+                            <button @click="openSearchPanel(); $nextTick(() => { $refs.searchInput.focus(); setTimeout(() => {isMobileSubMenuOpen= false}, 100) })" class="p-2 bg-white transition duration-200 rounded-full focus:outline-none">
+                                <span class="sr-only">Open search panel</span>
+                                <svg aria-hidden="true" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="https://www.w3.org/2000/svg">
+                                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                </svg>
+                            </button>
 
+                            <!-- Settings button -->
+                            <button @click="openSettingsPanel(); $nextTick(() => { isMobileSubMenuOpen = false })" class="p-2 bg-white transition duration-200 rounded-full focus:outline-none">
+                                <span class="sr-only">Open settings panel</span>
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="https://www.w3.org/2000/svg">
+                                    <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                                </svg>
+                            </button>
+							
+
+							
+                        </div>
+						                       <!-- Contacts avatar button -->
+                        <div class="relative" x-data="{ open: false }">
+                            <button :aria-expanded="open ? 'true' : 'false'" @click="open = !open" aria-haspopup="true" class="block p-2 transition-opacity duration-200 rounded-full focus:outline-none" type="button" aria-expanded="false">
+                                <span class="sr-only">Contacts menu</span>
+                                <img alt="Daiyaan Ijaz" class="w-10 h-10 rounded-full"  src="https://media-exp1.licdn.com/dms/image/C4E03AQHAR1PhrwJzmg/profile-displayphoto-shrink_100_100/0/1603263069216?e=1618444800&amp;v=beta&amp;t=dFbdkrNHu3aTTc8BqAeQUqN6GQYcyYqaQncAQR_053g" onload="SVGInject(this)">
+                            </button>
+
+                            <!-- Contacts dropdown menu -->
+                            <div @click.away="open = false" aria-label="Contacts menu" aria-orientation="vertical" class="absolute z-50 right-0 w-48 py-1 top-12 origin-top-left bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5" role="menu" x-show="open" x-transition:enter="transition-all transform ease-out" x-transition:enter-end="translate-y-0 opacity-100" x-transition:enter-start="translate-y-1/2 opacity-0" x-transition:leave="transition-all transform ease-in" x-transition:leave-end="translate-y-1/2 opacity-0" x-transition:leave-start="translate-y-0 opacity-100" style="display: none;">
+                                <a class="block px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-100" href="#" role="menuitem">
+                                    Your Profile
+                                </a>
+                                <a class="block px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-100" href="#" role="menuitem">
+                                    Settings
+                                </a>
+                                <a class="block px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-100" href="#" role="menuitem">
+                                    Logout
+                                </a>
+                            </div>
+                        </div>	
+ 
+                    </nav>
+   
 <!-- mobile button for more options -->
-<div class="fixed flex flex-col-reverse w-12 h-12 bg-white z-50 post rounded-full shadow cursor-pointer right-4 bottom-44 p-1 transition-colors duration-200 text-primary-light bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-primary-lighter dark:hover:bg-primary-dark dark:text-light dark:bg-darker md:hidden focus:outline-none focus:ring ">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <button
+                @click="isMobileSubMenuOpen = !isMobileSubMenuOpen"
+                class="bg-white z-50" 
+        >
+            <span class="sr-only">Open sub menu</span>
+			<span aria-hidden="true">		
+<div class="fixed flex flex-col-reverse w-12 h-12 bg-white z-50 rounded-full shadow cursor-pointer right-6 bottom-44 p-1 transition   hover:text-gray-400 hover:bg-gray-600 md:hidden focus:outline-none focus:ring ">
+
+			<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="https://www.w3.org/2000/svg">
                 <path d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
             </svg>
-                            
+            </span>			
     </div>
+</button>
+	
+	
+	
 
 <!-- main content goes here, in between the header and footer -->
-	  <main class="flex-1 post disabledbltap" style="-webkit-overflow-scrolling:touch">
+	  <main class="flex-1 post" style="-webkit-overflow-scrolling:touch">
 <!-- posts -->
 <?php post(5);?>
 <div
@@ -584,12 +540,12 @@ function noticesHandler() {
 
 
 
-	  <footer class="bg-white border-t border-gray-300 inset-x-0 bottom-0 text-center z-50 flex lg:hidden" style="touch-action: none;" id="footer">
+	  <footer class="bg-white border-t border-gray-300 inset-x-0 bottom-0 text-center z-50 flex lg:hidden" id="footer">
 <a href="." class="flex flex-col flex-grow items-center justify-center
 			overflow-hidden whitespace-no-wrap text-sm transition-colors
 			duration-100 ease-in-out hover:bg-gray-200 focus:text-orange-500">
 
-			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 				<circle cx="12" cy="12" r="3"></circle>
 				<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83
 					2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65
@@ -610,7 +566,7 @@ function noticesHandler() {
 			overflow-hidden whitespace-no-wrap text-sm transition-colors
 			duration-100 ease-in-out hover:bg-gray-200 text-orange-500">
 
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
+<svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
 	<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
 	<polyline points="9 22 9 12 15 12 15 22"></polyline>
 </svg>
@@ -625,7 +581,7 @@ function noticesHandler() {
 			overflow-hidden whitespace-no-wrap text-sm transition-colors
 			duration-100 ease-in-out hover:bg-gray-200 focus:text-orange-500">
 
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c3.032 0 5.5 2.467 5.5 5.5 0 1.458-.483 3.196-3.248 5.59 4.111 1.961 6.602 5.253 7.482 8.909h-19.486c.955-4.188 4.005-7.399 7.519-8.889-1.601-1.287-3.267-3.323-3.267-5.61 0-3.033 2.468-5.5 5.5-5.5zm0-2c-4.142 0-7.5 3.357-7.5 7.5 0 2.012.797 3.834 2.086 5.182-5.03 3.009-6.586 8.501-6.586 11.318h24c0-2.791-1.657-8.28-6.59-11.314 1.292-1.348 2.09-3.172 2.09-5.186 0-4.143-3.358-7.5-7.5-7.5z"/></svg>
+<svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c3.032 0 5.5 2.467 5.5 5.5 0 1.458-.483 3.196-3.248 5.59 4.111 1.961 6.602 5.253 7.482 8.909h-19.486c.955-4.188 4.005-7.399 7.519-8.889-1.601-1.287-3.267-3.323-3.267-5.61 0-3.033 2.468-5.5 5.5-5.5zm0-2c-4.142 0-7.5 3.357-7.5 7.5 0 2.012.797 3.834 2.086 5.182-5.03 3.009-6.586 8.501-6.586 11.318h24c0-2.791-1.657-8.28-6.59-11.314 1.292-1.348 2.09-3.172 2.09-5.186 0-4.143-3.358-7.5-7.5-7.5z"/></svg>
 
 			<span class="hidden text-sm capitalize">settings</span>
 		</a>
@@ -647,17 +603,35 @@ function noticesHandler() {
 
     $('#text').on('input propertychange', function () {
         if ($(this).val() !== "") {
-            $("#submitpost").removeClass("p-1 px-4 cursor-not-allowed font-semibold text-white transition transition-colors bg-red-500 rounded-md btn duration-200l text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-darker focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker");
-            $("#submitpost").addClass("p-1 px-4 font-semibold text-white transition transition-colors bg-red-500 rounded-md cursor-pointer btn duration-200l text-primary-lighter bg-primary-100 hover:text-primary hover:bg-primary dark:hover:text-light dark:hover:bg-primary-dark dark:bg-darker focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker");
+            $("#submitpost").removeClass("p-1 px-4 cursor-not-allowed font-semibold text-white transition transition-colors bg-red-500 rounded-md btn duration-200  focus:outline-none");
+            $("#submitpost").addClass("p-1 px-4 font-semibold text-white transition transition-colors bg-red-500 rounded-md cursor-pointer btn duration-200  focus:outline-none");
 			document.getElementById("submitpost").disabled = false;        
 		}
         else {
-            $("#submitpost").removeClass("p-1 px-4 font-semibold text-white transition transition-colors bg-red-500 rounded-md cursor-pointer btn duration-200l text-primary-lighter bg-primary-100 hover:text-primary hover:bg-primary dark:hover:text-light dark:hover:bg-primary-dark dark:bg-darker focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker");
-            $("#submitpost").addClass("p-1 px-4 cursor-not-allowed font-semibold text-white transition transition-colors bg-red-500 rounded-md btn duration-200l text-primary-lighter bg-primary-50 hover:text-primary hover:bg-primary-100 dark:hover:text-light dark:hover:bg-primary-dark dark:bg-darker focus:outline-none focus:bg-primary-100 dark:focus:bg-primary-dark focus:ring-primary-darker");
+            $("#submitpost").removeClass("p-1 px-4 font-semibold text-white transition transition-colors bg-red-500 rounded-md cursor-pointer btn duration-200 focus:outline-none");
+            $("#submitpost").addClass("p-1 px-4 cursor-not-allowed font-semibold text-white transition transition-colors bg-red-500 rounded-md btn duration-200 focus:outline-none");
 			document.getElementById("submitpost").disabled = true;        
 		}
     });	
 </script>
+
+<script>
+
+
+ const setup = () => {
+       return {
+            loading: true,
+		isMobileSubMenuOpen: false,
+		openMobileSubMenu() {
+			this.isMobileSubMenuOpen = true
+			this.$nextTick(() => {
+				this.$refs.mobileSubMenu.focus()
+			})
+		},
+	}
+}
+</script>
+
 
 <script>
     //define
@@ -696,5 +670,8 @@ function noticesHandler() {
 
     };
 </script>
+  <script>
+    SVGInject(document.querySelectorAll("img.injectable"));
+  </script>
 
 </html>
