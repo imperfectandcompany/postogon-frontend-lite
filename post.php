@@ -9,10 +9,10 @@
 			>
                <div class="my-1 select-none">?</div>
             </div>
-			<div class="absolute shadow-lg z-10 inset-y-1 text-center bg-white opacity-100 mt-5 ml-6" x-show="open" x-transition:enter="transition duration-200 ease-in-out transform" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition-all transform ease-in duration-300" x-transition:leave-start="translate-y-0 opacity-100 scale-100" x-transition:leave-end="translate-y-full opacity-0 scale-95" style="display: none;">
+			<div class="absolute flex-grow-1 shadow-lg z-10 inset-y-1 text-center bg-white opacity-100 mt-8 ml-5" x-show="open" x-transition:enter="transition duration-200 ease-in-out transform" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition-all transform ease-in duration-300" x-transition:leave-start="translate-y-0 opacity-100 scale-100" x-transition:leave-end="translate-y-full opacity-0 scale-95" style="display: none;">
           <ul>
             <li class="font-medium">
-              <a href="#" class="flex block bg-white px-4 shadow py-2 items-center transform text-sm text-gray-700 hover:bg-gray-100 duration-200 border-transparent">
+              <a href="#" class="flex bg-white px-4 shadow py-2 items-center transform text-sm text-gray-700 hover:bg-gray-100 duration-200 border-transparent">
                 <div class="mr-3">
 				<svg class="w-6 h-6" fill="none" stroke="#000000" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                 </div>
@@ -21,7 +21,7 @@
             </li>
 
             <li class="font-medium">
-              <a href="#" class="block flex px-4 shadow border-b bg-white py-2 items-center transform text-sm text-gray-700 transition-colors hover:bg-gray-100 duration-200  ">
+              <a href="#" class="flex px-4 shadow border-b bg-white py-2 items-center transform text-sm text-gray-700 transition-colors hover:bg-gray-100 duration-200  ">
                 <div class="mr-3 text-red-600">
 				<svg class="w-6 h-6" viewBox="0 0 24 24"><path d="M9.602 3.7c-1.154 1.937-.635 5.227 1.424 9.025.93 1.712.697 3.02.338 3.815-.982 2.178-3.675 2.799-6.525 3.456-1.964.454-1.839.87-1.839 4.004h-1.995l-.005-1.241c0-2.52.199-3.975 3.178-4.663 3.365-.777 6.688-1.473 5.09-4.418-4.733-8.729-1.35-13.678 3.732-13.678 3.321 0 5.97 2.117 5.97 6.167 0 3.555-1.949 6.833-2.383 7.833h-2.115c.392-1.536 2.499-4.366 2.499-7.842 0-5.153-5.867-4.985-7.369-2.458zm13.398 15.3h-3v-3h-2v3h-3v2h3v3h2v-3h3v-2z"/></svg>               
 			   </div>
@@ -29,7 +29,7 @@
               </a>
             </li>
             <li class="font-medium">
-              <a href="#" class="block flex px-4 shadow border-b bg-white py-2 items-center transform text-sm text-gray-700 transition-colors hover:bg-gray-100 duration-200  ">
+              <a href="#" class="flex px-4 shadow border-b bg-white py-2 items-center transform text-sm text-gray-700 transition-colors hover:bg-gray-100 duration-200  ">
                 <div class="mr-3 text-red-600">
 				<svg class="w-6 h-6" viewBox="0 0 24 24"><path d="M19.5 15c-2.483 0-4.5 2.015-4.5 4.5s2.017 4.5 4.5 4.5 4.5-2.015 4.5-4.5-2.017-4.5-4.5-4.5zm2.5 5h-5v-1h5v1zm-7.18 4h-14.815l-.005-1.241c0-2.52.199-3.975 3.178-4.663 3.365-.777 6.688-1.473 5.09-4.418-4.733-8.729-1.35-13.678 3.732-13.678 6.751 0 7.506 7.595 3.64 13.679-1.292 2.031-2.64 3.63-2.64 5.821 0 1.747.696 3.331 1.82 4.5z"/></svg>			   </div>
                 <div class="select-none">Remove from feed 2</div>
