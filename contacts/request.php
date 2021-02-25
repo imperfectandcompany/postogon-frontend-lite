@@ -5,24 +5,28 @@
                     </div>
                     <div class="flex flex-col mb-2 ml-4 w-full mt-1">
 					
-					    <div class="flex w-full">
-                        <div class="text-gray-600 text-sm font-semibold">
-							Daiyaan Ijaz
-						</div>
-						<div class="flex ml-auto space-x-4">
-							<button class="text-green-600 transition focus:text-green-100 hover:text-green-200 cursor-pointer text-3xl font-bold focus:outline-none">Y</button>
-							<button class="text-red-600 transition focus:text-red-100 hover:text-red-200 cursor-pointer text-3xl font-bold focus:outline-none">N</button>				
-						</div>
-					</div>
-						
-                        <div class="flex w-full mt-1">
-                            <div class="font-base text-xs mr-1">
+					    <div class="flex ">
+                        <div class="text-gray-600 mb-4 text-sm font-semibold">
+							Daiyaan Ijaz	
+				    <div class="flex flex-row mt-1">
+                            <div class="font-base text-xs mr-1 ">
                                 Contact Request
                             </div> 
                             <div class="text-gray-600 font-thin text-xs">
                                 • 30 minutes ago
                             </div>
-                        </div>
+                        </div>							
+					</div>
+				
+						<div class="flex ml-auto space-x-4">
+							<button class="text-green-600 transition focus:text-green-100 hover:text-green-200 cursor-pointer text-4xl font-bold focus:outline-none">Y</button>
+							<button class="text-red-600 transition focus:text-red-100 hover:text-red-200 cursor-pointer text-4xl font-bold focus:outline-none">N</button>				
+						</div>
+						
+		
+					</div>
+						
+
                     </div>
                 </div>
 	  </div>
