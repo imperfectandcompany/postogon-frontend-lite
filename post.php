@@ -1,5 +1,6 @@
-      <div class="bg-white px-4 py-4 hidden m-0 lg:ml-96 lg:mr-96 transition shadow-none md:shadow border-b border-6" id="normalpost">
-         <div class="flex">
+	<div id="<?php echo $postid;?>" style="overflow-hidden w-full h-auto"> 
+	<div class="bg-white px-4 py-4 hidden m-0 lg:ml-96 lg:mr-96 transition shadow-none md:shadow border-b border-6" id="normalpost">
+         <div class="flex" >
 		 <div class="relative" x-data="{ open: false }">
             <div class="w-10 h-10 mr-3 font-bold text-center text-white bg-gray-700 bg-center bg-cover border-4 border-gray-500 rounded-full cursor-pointer hover:bg-gray-600"
 			@click="open = !open" @click.away="open = false" :class="{'border-red-400 bg-red-200 text-red-400 hover:bg-red-300 transform transition duration-300 ': open}"
@@ -9,16 +10,17 @@
 			>
                <div class="my-1 select-none">?</div>
             </div>
-			<div class="absolute mt-6 ml-4 shadow-lg z-10 inset-y-1 text-center bg-white" x-show="open" x-transition:enter="transition duration-200 ease-in-out transform" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition-all transform ease-in duration-300" x-transition:leave-start="translate-y-0 opacity-100 scale-100" x-transition:leave-end="translate-y-full opacity-0 scale-95" style="display: none;">
-        <div class='flex shadow bg-white items-center px-6 py-6'>
-            <div class="relative w-10 h-10 border-4 font-bold text-center text-white bg-gray-700 bg-center bg-cover border-4 border-gray-500 rounded-full cursor-pointer hover:bg-gray-600 ">
-			<div class="my-1 select-none">?</div>
-			</div>
-            
-            <div class='mx-4'>
-                <p class='text-blue-600 cursor-pointer text-underline'>@Profile</p>
-                <p class='text-gray-400'></p>                
-            </div>
+			
+			<div class="absolute mt-6 ml-4 shadow-lg z-10 inset-y-1 text-center" x-show="open" x-transition:enter="transition duration-200 ease-in-out transform" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition-all transform ease-in duration-300" x-transition:leave-start="translate-y-0 opacity-100 scale-100" x-transition:leave-end="translate-y-full opacity-0 scale-95" style="display: none;">
+	  <div class='bg-white shadow rounded'>           
+		   <div class='mr-2 ml-2'>
+                <p class='text-blue-600 '>@Profile</p>
+                <p class='text-gray-400 text-xs	mb-3'>Yale '22, Studying Engineering 💻</p>                
+
+
+					
+	  <div class='flex items-center  mt-4'>
+
             <div class='mx-2'>
                 <p class='text-purple-900 font-bold'>289</p>
                 <p class='text-purple-300'>Posts</p>                
@@ -32,11 +34,18 @@
                 <p class='text-purple-300'>Activity</p>                
             </div>
             <div class='mx-4'>
-                <button class="bg-green-400 text-green-100 px-4 py-1 rounded">View Profile
+                <button class="bg-green-400 text-green-100 px-4 py-1 rounded focus:outline-none">Profile
 				</button>              
             </div>
         </div>
+		            </div>
+		
+		
+		
+		
+		</div>
         </div>
+		
 		</div>
 			
 			
@@ -107,10 +116,10 @@
 
 
 		 
-                <div class="flex w-full justify-start mb-4  ">		 
+                <div class="flex w-full justify-start border-t border-gray-100 border-opacity-50">		 
 				
 									
-                    <div class="flex mt-1 flex-row-reverse pt-2 pr-5">
+                    <div class="flex mt-1 flex-row-reverse pt-2">
 						<button x-data="{}" class="focus:outline-none"
 		x-on:click="$dispatch('notice', {type: 'saved', text: '💾 Saved'})">
 		<div x-data="{ active: false }" :class="{ 'text-blue-500': active, 'hover:bg-blue-200': active }"  @click="active = !active" class="transition focus:outline-none focus:opacity-50 hover:bg-gray-200  focus:text-blue-500 w-8 h-8 px-2 py-2 focus:outline-none text-center rounded-full text-gray-400 cursor-pointer">                           
@@ -129,9 +138,10 @@
                             </svg>
 							</div>
 	</button>
-	</div>
-	
-						<button x-data="{}" class="focus:outline-none"
+	</div>   
+
+
+						    <a onclick="btnDownload('<?php echo $postid;?>')"  x-data="{}" class="focus:outline-none"
 		x-on:click="$dispatch('notice', {type: 'download', text: '📥 Downloading...'})">
 		<div x-data="{ active: false }" :class="{ 'text-blue-500': active, 'hover:bg-blue-200': active }" @click.away="{active: false}" @click="active = !active" class="transition focus:outline-none focus:opacity-50 hover:bg-gray-200  focus:text-blue-500 w-8 h-8 px-2 py-2 focus:outline-none text-center rounded-full text-gray-400 cursor-pointer">                           
 		<svg xmlns="https://www.w3.org/2000/svg" fill="none"  viewBox="0 0 24 24" stroke="currentColor">
@@ -139,15 +149,17 @@
 								</div>
                             </svg>
 		
-	</button>
+	</a>
 
 						
                     </div>
-				
-				
-                    <div class="flex justify-end w-full mt-1 pt-2 pl-5">
 
-<button x-data="{
+				
+
+                    <div class="flex justify-end w-full mt-1  pl-5 px-2 py-2 ">
+
+                                <!-- the like svg -->
+                                <div  x-data="{
   state: 'Unliked',
   usedKeyboard: false,
   async updateState(to) {
@@ -163,12 +175,21 @@ x-on:click="$dispatch('notice', {type: 'like', text: '🤍 Updating'})"
   'like liked': state === 'Liked',
   'focus:outline-none': !usedKeyboard
 }"
-@click="updateState(state === 'Unliked' ? 'Liked' : 'Unliked')" @keydown.window.tab="usedKeyboard = true">
+@click="updateState(state === 'Unliked' ? 'Liked' : 'Unliked')"  @keydown.window.tab="usedKeyboard = true">
+    
   <span class="like-icon like-icon-state" aria-label="state" x-text="state" aria-live="polite">Unliked</span>
-</button>					
-						
+  
+                                </div>
+                    <span class="text-gray-400 ml-2">
+                        156
+                    </span>
 
-                    </div>
+							</div>
+             
+	
+
+				
+
 					
 
 
@@ -177,3 +198,4 @@ x-on:click="$dispatch('notice', {type: 'like', text: '🤍 Updating'})"
 					</div>
 		 
       </div>
+	      </div>  

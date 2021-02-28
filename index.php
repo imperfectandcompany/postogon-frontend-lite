@@ -16,6 +16,7 @@ function post($amt)
     $i = 0;
 
     while ($i < $amt) {
+		$postid = 'postid_'.$i.'';
         include("post.php");
         $i++;
     }
@@ -36,6 +37,8 @@ function post($amt)
          rel="stylesheet"
          />
   <script src="svg-inject.min.js"></script>		 
+  <!-- post download script -->
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>  
 <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@1.x.x/dist/alpine-clipboard.js"></script>		 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>		 
       <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
@@ -86,9 +89,8 @@ main {
 }
 
 .like {
-	display: inline-block;
-	width: 2rem;
-	height: 2rem;
+	width: 1.5rem;
+	height: 1.5rem;
 	border-radius: 50%;
 	background: #FFF;
 	position: relative;
@@ -401,7 +403,7 @@ window.onscroll = function() {
         </div>
 <?php createpost(); ?>
    
-<nav @click.away="isMobileSubMenuOpen = false" x-cloak aria-label="Secondary" :class="{'block': true}" class="block bg-white w-24 fixed flex-col-reverse z-50 flex items-center p-4 rounded-md shadow-lg bottom-64 right-0 md:hidden" x-show="isMobileSubMenuOpen" x-transition:enter="transition duration-200 ease-in-out transform sm:duration-500" x-transition:enter-end="translate-y-0 opacity-100" x-transition:enter-start="translate-x-full opacity-0" x-transition:leave="transition duration-300 ease-in-out transform sm:duration-500" x-transition:leave-end="-translate-y-full opacity-0" x-transition:leave-start="translate-y-0 opacity-100">
+<nav @click.away="isMobileSubMenuOpen = false" x-cloak aria-label="Secondary" :class="{'block': true}" class="block bg-white w-24 fixed flex-col-reverse z-50 flex items-center p-4 rounded-md shadow-lg bottom-64 left-0 md:hidden" x-show="isMobileSubMenuOpen" x-transition:enter="transition duration-200 ease-in-out transform sm:duration-500" x-transition:enter-end="translate-y-0 opacity-100" x-transition:enter-start="translate-x-full opacity-0" x-transition:leave="transition duration-300 ease-in-out transform sm:duration-500" x-transition:leave-end="-translate-y-full opacity-0" x-transition:leave-start="translate-y-0 opacity-100">
                         <div class="flex space-y-2 flex-col-reverse">
                             <!-- Notification button -->
                             <button @click="openNotificationsPanel(); $nextTick(() => { isMobileSubMenuOpen = false })" class="p-2 bg-white transition duration-200 rounded-full focus:outline-none">
@@ -439,7 +441,7 @@ window.onscroll = function() {
                             </button>
 
                             <!-- Contacts dropdown menu -->
-                            <div @click.away="open = false" aria-label="Contacts menu" aria-orientation="vertical" class="absolute z-50 right-0 w-48 py-1 top-12 origin-top-left bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5" role="menu" x-show="open" x-transition:enter="transition-all transform ease-out" x-transition:enter-end="translate-y-0 opacity-100" x-transition:enter-start="translate-y-1/2 opacity-0" x-transition:leave="transition-all transform ease-in" x-transition:leave-end="translate-y-1/2 opacity-0" x-transition:leave-start="translate-y-0 opacity-100" style="display: none;">
+                            <div @click.away="open = false" aria-label="Contacts menu" aria-orientation="vertical" class="absolute z-50 left-4 w-48 py-2 top-12 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5" role="menu" x-show="open" x-transition:enter="transition-all transform ease-out" x-transition:enter-end="translate-y-0 opacity-100" x-transition:enter-start="translate-y-1/2 opacity-0" x-transition:leave="transition-all transform ease-in" x-transition:leave-end="translate-y-1/2 opacity-0" x-transition:leave-start="translate-y-0 opacity-100" style="display: none;">
                                 <a class="block px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-100" href="#" role="menuitem">
                                     Your Profile
                                 </a>
@@ -475,6 +477,9 @@ window.onscroll = function() {
 
 <!-- main content goes here, in between the header and footer -->
 	  <main class="flex-1 post" style="-webkit-overflow-scrolling:touch">
+
+
+	  
 <!-- posts -->
 <?php post(5);?>
 <div
@@ -499,6 +504,7 @@ window.onscroll = function() {
 				'bg-blue-500 text-white': notice.type === 'download',
 				'bg-red-500 text-white': notice.type === 'like',
 			 }"
+			 
 			style="pointer-events:all"
 			x-text="notice.text">
 		</div>
@@ -590,6 +596,47 @@ function noticesHandler() {
 
 	  </div>	  
 	  
+
+
+
+
+
+	  <script>
+	  
+
+function download(url){
+  var a = $("<a style='display:none'>")
+  .attr("href", url)
+  .attr("download", "test.png")
+  .appendTo("body");
+
+  a[0].click();
+
+  a.remove();
+}
+
+
+//i couldn't figure out how to just capture the elements width, for now its set to save the windows screen. a suggestion for later would be to use iframe and capture that elements window.
+function saveCapture(element) {
+  html2canvas(element, {
+	  useCORS: true,
+	  width: window.screen.availWidth,
+	  height: window.screen.availHeight,
+	  windowWidth: element.scrollWidth,
+	  WindowHeight: element.scrollHeight,
+	  x: 0,
+	  y: window.pageYOffset
+	  }).then(function(canvas) {
+    download(canvas.toDataURL("image/png"));
+  })
+}
+
+function btnDownload(id){
+var postid = id;
+var element = document.getElementById(postid);
+saveCapture(element)
+}
+</script>  
    </body>
    
    <script>
@@ -673,5 +720,8 @@ function noticesHandler() {
   <script>
     SVGInject(document.querySelectorAll("img.injectable"));
   </script>
+  
+
+  
 
 </html>
