@@ -1,7 +1,7 @@
       <div class="bg-white px-4 py-4 m-0 lg:ml-96 lg:mr-96 transition shadow-none md:shadow border-b border-6 " id="normalpost">
 
 <div class="flex items-center justify-center">
-        <div class="bg-white w-1/3 mt-10 rounded-lg">
+        <div class="bg-white mt-10 rounded-lg">
             <div class="flex items-center justify-center pt-10">
                 <div class="bg-gradient-to-tr from-yellow-400 to-red-700 p-1 rounded-full">
                     <a href="">
@@ -19,16 +19,40 @@
                 in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </h1>
 
-            <div class="grid grid-cols-3 divide-x divide-yellow-500 text-center">
-                <div class="text-yellow-600 font-bold text-xl ">Contacts</div>
-                <div class="text-yellow-600 font-bold text-xl ">Friends</div>
-                <div class="text-yellow-600 font-bold text-xl ">Followers</div>
-            </div>
-            <div class="grid grid-cols-3 divide-x divide-yellow-500 text-center font-sans ">
-                <div class="font-bold text-xl">50</div>
-                <div class="font-bold text-xl">23</div>
-                <div class="font-bold text-xl">10</div>
-            </div>
+
+<div class="flex justify-center space-x-2">
+
+<div class="text-center">
+<div class="text-center text-yellow-600 uppercase font-bold text-lg">
+Contacts
+</div>
+<div class="text-lg font-semibold">
+50
+</div>
+</div>
+
+<div class="text-center">
+<div class="text-center text-yellow-600 uppercase font-bold text-lg">
+Friends
+</div>
+<div class="text-lg font-semibold">
+50
+</div>
+</div>
+
+<div class="text-center">
+<div class="text-center text-yellow-600 uppercase font-bold text-lg">
+Followers
+</div>
+<div class="text-lg font-semibold">
+50
+</div>
+</div>
+
+</div>
+
+
+
 
             <div class="py-3">
             </div>
@@ -41,8 +65,8 @@
             <div class="py-3">
             </div>
         </div>
-
-   
+</div>
+ </div>
 	
 	  
 	  

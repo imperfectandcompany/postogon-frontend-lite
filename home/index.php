@@ -41,7 +41,8 @@ function post($amt)
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>  
 <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@1.x.x/dist/alpine-clipboard.js"></script>		 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>		 
-      <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+       <script src="pull-to-reload.js"></script>    
+	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
       <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
       <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.5.x/dist/component.min.js"></script>
       <script defer src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js"></script>
@@ -329,6 +330,21 @@ body {
 }
 
 	  </style>
+   <script>
+            var ptr;
+
+            document.addEventListener("DOMContentLoaded", function() {
+                ptr = new PullToReload({ 
+                    'callback-loading': function(){
+                        setTimeout(function(){
+                            ptr.loadingEnd();
+                        }, 5000);
+                    }
+                });
+                
+            });
+
+        </script>
    </head>
 
 
@@ -385,7 +401,7 @@ window.onscroll = function() {
 
 
    
-   <body>
+   <body class="bg-gray-200">
    <div class="flex flex-col" x-data="setup()" x-init="$refs.loading.classList.add('hidden');">
 
         <!-- Loading screen -->		 
@@ -481,7 +497,14 @@ window.onscroll = function() {
 
 	  
 <!-- posts -->
+        <div id="ptr">
+            ...
+        </div>
+		
+		
+<div id="content" class="mt-6">
 <?php post(5);?>
+</div>
 <div
 	x-data="noticesHandler()"
 	class="fixed inset-0 flex flex-col-reverse left-4 bottom-16 z-20 items-start justify-start"

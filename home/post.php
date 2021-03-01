@@ -1,5 +1,7 @@
-	<div id="<?php echo $postid;?>" style="overflow-hidden w-full h-auto"> 
-	<div class="bg-white px-4 py-4 hidden m-0 lg:ml-96 lg:mr-96 transition shadow-none md:shadow border-b border-6" id="normalpost">
+	<div class="" id="<?php echo $postid;?>" style="overflow-hidden h-auto"> 
+
+	<div class="bg-white rounded p-2 mb-2 shadow-2xl px-4 py-4 hidden m-0 lg:ml-96 lg:mr-96 transition border-b border-6" id="normalpost">
+
          <div class="flex" >
 		 <div class="relative" x-data="{ open: false }">
             <div class="w-10 h-10 mr-3 font-bold text-center text-white bg-gray-700 bg-center bg-cover border-4 border-gray-500 rounded-full cursor-pointer hover:bg-gray-600"
@@ -194,6 +196,7 @@ x-on:click="$dispatch('notice', {type: 'like', text: '🤍 Updating'})"
 
 					
 					</div>
-		 
+
       </div>
+
 	      </div>  
