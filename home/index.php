@@ -36,12 +36,12 @@ function post($amt)
          href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
          rel="stylesheet"
          />
-  <script src="svg-inject.min.js"></script>		 
+  <script src="../assets/scripts/svg-inject.min.js"></script>		 
   <!-- post download script -->
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>  
 <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@1.x.x/dist/alpine-clipboard.js"></script>		 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>		 
-       <script src="pull-to-reload.js"></script>    
+       <script src="./scripts/pull-to-reload.js"></script>    
 	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
       <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
       <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.5.x/dist/component.min.js"></script>
@@ -338,7 +338,7 @@ body {
                     'callback-loading': function(){
                         setTimeout(function(){
                             ptr.loadingEnd();
-                        }, 5000);
+                        }, 3000);
                     }
                 });
                 
@@ -401,7 +401,7 @@ window.onscroll = function() {
 
 
    
-   <body class="bg-gray-200">
+   <body class="bg-gray-100">
    <div class="flex flex-col" x-data="setup()" x-init="$refs.loading.classList.add('hidden');">
 
         <!-- Loading screen -->		 
@@ -498,7 +498,18 @@ window.onscroll = function() {
 	  
 <!-- posts -->
         <div id="ptr">
-            ...
+         <div
+                class="z-50 flex items-center w-full justify-center animate-pulse  font-bold bg-white"
+               
+        >
+		
+            <img
+                    class="h-8 w-8 mx-auto " 
+                    style="filter:brightness(0.1)"
+                    src="https://postogon.com/home/assets/logo.svg"
+                    alt="postogon logo"/>
+            <div class="h-16 flex items-center mx-auto">Pull to refresh</div>
+        </div>
         </div>
 		
 		

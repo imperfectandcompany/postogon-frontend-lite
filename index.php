@@ -29,25 +29,59 @@
 
 
       <div class="relative max-w-md hidden float-right md:pt-8 pl-18 lg:block md:pr-36">
-        <input class="form-control mr-sm-2 search-bar bg-purple-white shadow rounded border-0 p-3 inset-x-0 top-0 " type="search" placeholder="Search" aria-label="Search" required>
-      </div>
+<div class="font-sans text-black ">
+  <form class="border rounded flex" action="results.php" method="get">
+    <input type="text" name="search_query" class="px-4 py-2 focus:ring-inset focus:ring-2 focus:outline-none select-none focus:ring-blue-500 focus:ring-opacity-100" placeholder="Search...">
+    <button type="submit" class="flex items-center focus:outline-none text-gray-400 hover:text-gray-900 justify-center px-4 border-l">
+      <svg class="h-4 w-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/></svg>
+    </button>
+  </form>
+</div>    
+</div>
 
-	                          <div class="block lg:hidden text-2xl text-gray-800 tracking-wide ml-2 font-semibold"><a href="index.php"> 	  	  	              <object data="assets/logo.svg" class="inline-block md:hidden h-8" style="filter:brightness(0.1)"></object>
-Postogon</a></div>
-      <div class="md:mx-56 hidden lg:block md:ml-8 pt-10 md:pl-10 font-semibold text-6xl md:text-7xl"><a href="index.php"> Postogon</a></div>
-      <br>
 
-	              <object data="assets/logo.svg"	class="hidden md:block max-w-sm relative md:max-w-xs right-40" style="filter:brightness(0.1)"></object>
+
+         <div class="bg-white md:hidden">
+            <div class="flex space-between  px-6 py-4 shadow-sm">
+			<div class="flex mr-auto">
+               <a href="../"><img class="h-8 w-8" style="filter:brightness(0.1)" src="https://postogon.com/home/assets/logo.svg" alt="postogon logo"/></a>
+			   </div>
+			   <a href="./"><h1 class="flex px-6 text-xl font-semibold cursor-pointer">Postogon</h1></a>
+            </div>
+         </div>
+
+      <div class="md:mx-56 hidden lg:block md:ml-8 pt-10 md:pl-10 font-semibold text-6xl md:text-7xl"><a href="index.php">Postogon</a></div>
+
+
+	              <object data="assets/logo.svg"	class="hidden md:block select-none max-w-sm relative md:max-w-xs right-40" style="filter:brightness(0.1)"></object>
 	  
-      <br>
-      <img src="./assets/img/index-guy.png" class="hidden lg:block relative lg:max-w-lg md:max-w-md bottom-80">
+
+      <img src="./assets/img/index-guy.png" class="hidden select-none lg:block relative lg:max-w-lg md:max-w-md bottom-80 lg:bottom-56    xl:max-w-2xl overflow-hidden		"/>
 	  
+
       
 
     </div>
-    <div class="container ml-auto mx-auto md:mr-24 relative p-12 lg:top-40 max-w-lg">
-	                <input class="w-full block md:hidden h-16 px-3 rounded mb-8 focus:outline-none focus:shadow-outline text-xl px-8 shadow-lg" type="search" placeholder="Search...">
-      <h1 class="font-semibold text-5xl pb-5 text-center md:text-left">Enter</h1>
+	
+
+	
+    <div class="container ml-auto mx-auto md:mr-24 xl:mr-44 relative p-12 lg:top-40 max-w-lg">
+	
+      <div class="relative max-w-x mt-6 justify-center pt-6 pb-8 md:hidden md:pr-36">
+<div class="font-sans text-black ">
+
+  <form class="border rounded flex" action="results.php" method="get">
+
+    <input type="text" name="search_query" class="px-4 py-2 focus:ring-inset w-full focus:ring-2 focus:outline-none focus:ring-blue-500 focus:ring-opacity-100" placeholder="Search..."/>
+    <button type="submit" class="flex items-center focus:outline-none text-gray-400 hover:text-gray-900 justify-center px-4 border-l">
+      <svg class="h-4 w-4" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/></svg>
+    </button>
+  </form>
+
+</div>    
+</div>
+
+  <h1 class="font-semibold text-5xl pb-5 text-center md:text-left">Enter</h1>
 <form>
   <div class="mb-4">
     <label class="block text-md font-light mb-2" for="email">Email</label>
@@ -69,17 +103,19 @@ Postogon</a></div>
   <p class="text-center text-md font-light">Don't have an account? <button class="modal-open font-light text-md text-indigo-600">Get Started</button></p>
 </form>  
 
+
+
       <div class="md:flex justify-between items-center pt-20 text-sm">
         <div class="text-center md:text-left py-3  mx-auto border-b md:border-b-0">
-		<div class="text-gray-500 text-center md:mr-4">&copy; 2020 Postogon</div>
+		<div class="text-gray-500 select-none text-center md:mr-4">&copy; 2021 Postogon</div>
         </div>
 
         <div class="md:flex md:flex-row-reverse items-center">
           <div class="text-center mb-4 md:mb-0 md:flex">
             <div class="w-48 inline-block relative mb-4 mt-4 md:mt-0 md:mb-0 md:mr-4">
-		  <a href="#" class="text-gray-500 mr-3">Jobs</a>
-		  <a href="#" class="text-gray-500 mr-3">Legal</a>
-		  <a href="#" class="text-gray-500 mr-3">Privacy</a>
+		  <a href="https://imperfectandcompany.com/careers/" target="_blank" class="text-gray-500 mr-3">Jobs</a>
+		  <a href="https://imperfectandcompany.com/terms-of-service/" target="_blank" class="text-gray-500 mr-3">Legal</a>
+		  <a href="https://imperfectandcompany.com/privacy-policy/" target="_blank" class="text-gray-500 mr-3">Privacy</a>
             </div>
             <div>
             </div>
