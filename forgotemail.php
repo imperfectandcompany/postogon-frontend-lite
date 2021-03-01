@@ -44,7 +44,7 @@
          <div class="bg-white md:hidden">
             <div class="flex space-between  px-6 py-4 shadow-sm">
 			<div class="flex mr-auto">
-               <a href="../"><img class="h-8 w-8" style="filter:brightness(0.1)" src="https://postogon.com/home/assets/logo.svg" alt="postogon logo"/></a>
+               <a href="../"><img class="h-8 w-8" style="filter:brightness(0.1)" src="assets/logo.svg" alt="postogon logo"/></a>
 			   </div>
 			   <a href="./"><h1 class="flex px-6 text-xl font-semibold cursor-pointer">Postogon</h1></a>
             </div>

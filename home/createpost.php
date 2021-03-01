@@ -2,7 +2,7 @@
          <div class="bg-white">
             <div class="flex justify-end flex-shrink-0 px-6 py-4 border-b border-gray-300">
 			<div class="flex mr-auto">
-               <a href="../"><img class="h-8 w-8" style="filter:brightness(0.1)" src="https://postogon.com/home/assets/logo.svg" alt="postogon logo"/></a>
+               <a href="../"><img class="h-8 w-8" style="filter:brightness(0.1)" src="../assets/logo.svg" alt="postogon logo"/></a>
 			   <a href="./"><h1 class="px-6 text-xl font-semibold cursor-pointer">Home</h1></a>
 			   </div>
 			   <div class="flex ">

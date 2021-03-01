@@ -384,7 +384,7 @@ window.onscroll = function() {
             <img
                     class="h-32 w-32 mx-auto injectable" 
                     style="filter:brightness(0.1)"
-                    src="https://postogon.com/home/assets/logo.svg"
+                    src="../../assets/logo.svg"
                     alt="postogon logo"/>
             <div class="h-16 flex items-center mx-auto">Loading.....</div>
         </div>

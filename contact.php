@@ -41,17 +41,16 @@
 
 
 
-         <div class="bg-white md:hidden">
-            <div class="flex justify-end flex-shrink-0 px-6 py-4 border-b border-gray-300">
+       <div class="bg-white md:hidden">
+            <div class="flex space-between  px-6 py-4 shadow-sm">
 			<div class="flex mr-auto">
-               <a href="../"><img class="h-8 w-8" style="filter:brightness(0.1)" src="https://postogon.com/home/assets/logo.svg" alt="postogon logo"/></a>
-			   <a href="./"><h1 class="px-6 text-xl font-semibold cursor-pointer">Postgon</h1></a>
+               <a href="../"><img class="h-8 w-8" style="filter:brightness(0.1)" src="assets/logo.svg" alt="postogon logo"/></a>
 			   </div>
-
+			   <a href="./"><h1 class="flex px-6 text-xl font-semibold cursor-pointer">Postogon</h1></a>
             </div>
          </div>
 
-      <div class="md:mx-56 hidden lg:block md:ml-8 pt-10 md:pl-10 font-semibold text-6xl md:text-7xl"><a href="index.php"> Postogon</a></div>
+      <div class="md:mx-56 hidden lg:block md:ml-8 pt-10 md:pl-10 font-semibold text-6xl md:text-7xl"><a href="index.php">Postogon</a></div>
 
 
 	              <object data="assets/logo.svg"	class="hidden md:block select-none max-w-sm relative md:max-w-xs right-40" style="filter:brightness(0.1)"></object>
@@ -68,7 +67,7 @@
 	
     <div class="container ml-auto mx-auto md:mr-24 xl:mr-44 relative p-12 lg:top-40 max-w-lg">
 	
-      <div class="relative max-w-x justify-center pt-6 pb-8 md:hidden md:pr-36">
+      <div class="relative max-w-x mt-6 justify-center pt-6 pb-8 md:hidden md:pr-36">
 <div class="font-sans text-black ">
 
   <form class="border rounded flex" action="results.php" method="get">
@@ -82,7 +81,7 @@
 </div>    
 </div>
 
-  <h1 class="font-semibold text-5xl pb-5 text-center md:text-left">Enter</h1>
+  <h1 class="font-semibold text-5xl pb-5 text-center md:text-left">Contact Us</h1>
 <form>
   <div class="mb-4">
     <label class="block text-md font-light mb-2" for="email">Email</label>
@@ -102,7 +101,7 @@
     </button>
 
   </div>
-  <p class="text-center text-md font-light">Don't have an account? <a class="font-light text-md text-indigo-600 href="#">Join</a></p>
+  <p class="text-center text-md font-light">Don't have an account? <button class="modal-open font-light text-md text-indigo-600">Get Started</button></p>
 </form>  
 
 
