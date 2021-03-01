@@ -59,7 +59,7 @@ Postogon</a></div>
   </div>
 
   <div class="flex items-center justify-between mb-5">
-    <a href="/home" class="bg-indigo-600 flex-initial justify-items-start hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded focus:outline-none focus:shadow-outline" type="button">
+    <a href="./home" class="bg-indigo-600 flex-initial justify-items-start hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded focus:outline-none focus:shadow-outline" type="button">
       Log In
     </a>
     <a class="inline-block align-baseline font-light text-sm text-indigo-600 hover:text-indigo-500" href="forgotpass.php">
