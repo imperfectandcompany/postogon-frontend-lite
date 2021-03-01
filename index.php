@@ -1,750 +1,209 @@
-<?php
-function createpost()
-{
-    include_once("createpost.php");
-}
-
-function post($amt)
-{
-    $i = 0;
-
-    while ($i < $amt) {
-        include("skeleton.php");
-        $i++;
-    }
-
-    $i = 0;
-
-    while ($i < $amt) {
-		$postid = 'postid_'.$i.'';
-        include("post.php");
-        $i++;
-    }
-
-}
-?>
-<html>
-   <head>
-      <meta charset="utf-8"/>
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, minimal-ui" id="viewportMeta" />
-      <title>Home - Postogon</title>
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">	  
-      <link
-         href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
-         rel="stylesheet"
-         />
-  <script src="svg-inject.min.js"></script>		 
-  <!-- post download script -->
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>  
-<script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@1.x.x/dist/alpine-clipboard.js"></script>		 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>		 
-      <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-      <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.5.x/dist/component.min.js"></script>
-      <script defer src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js"></script>
-	  <style>
-@supports(padding: max(0px)) {
-    .post {
-        padding-left: max(12px, env(safe-area-inset-left));
-        padding-right: max(12px, env(safe-area-inset-right));
-		height: calc(100% + (var(--safe-area-inset-top) + var(--safe-area-inset-bottom)));
-
-    }
-}
-
-:root {
-  --header-height: 65px;
-  --headeropen-height: 230px;  
-  --footer-height: 3.5rem;
-}
-
-header {
-  height: 65px;
-  height: var(--header-height, 65px);
-  position: sticky;
-  transition: top 0.3s ease-in-out;  
-  top: 0;
-}
-
-.headeropen {
-  height: 230px;
-  height: var(--headeropen-height, 230px);
-}
-
-footer {
-  position: fixed;
-  overflow-y: scroll;
-  bottom: 0;
-  height: 3.5rem;
-  height: var(--header-height, 3.5rem);
-}
-
-main {
-  margin-bottom: 3.5rem;
-  margin-bottom: calc(3.5rem);
-  margin-bottom: calc(var(--footer-height, 3.5rem));
-}
-
-.like {
-	width: 1.5rem;
-	height: 1.5rem;
-	border-radius: 50%;
-	background: #FFF;
-	position: relative;
-	cursor: pointer;
-	transition: background-color 0.25s ease;
-	overflow: hidden;
-}
-
-.like:hover {
-	background: rgba(229, 231, 235, var(--tw-bg-opacity));
-	transition: background-color 0.25s ease;
-}
-
-.liked .like-icon-state {
-	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewbox='0 0 100 100'><path fill='%23de3618' d='M50,88.87 C76.67,70.46 90,53.9 90,39.17 C90,17.08 63.12,3.84 50,27.63 C38.875,3.85 10,17.08 10,39.17 C10,53.9 23.33,70.46 50,88.87 Z'/></svg>");
-}
-
-.unliked .like-icon-state {
-	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewbox='0 0 100 100'><path fill='none' stroke='%23666' stroke-width='5' d='M50,88.87 C76.67,70.46 90,53.9 90,39.17 C90,17.08 63.12,3.84 50,27.63 C38.875,3.85 10,17.08 10,39.17 C10,53.9 23.33,70.46 50,88.87 Z'/></svg>");
-}
-	
-.like span {
-	text-indent: -1000px;
-	fone-size: 1px;
-}
-
-.like-icon {
-	background-size: contain;
-	position: absolute;
-	background-repeat: no-repeat;
-	background-position: 50% 50%;
-	top: 15%;
-	right: 15%;
-	bottom: 15%;
-	left: 15%;
-}
-
-.liked .like-icon-state {
-	transform: scale(0);
-}
-
-.liked .like-icon-state {
-	opacity: 0;
-	animation: 1.2s like-animation both cubic-bezier(0.45, 0.05, 0.55, 0.95);
-}
-
-@keyframes like-animation {
-	0% {
-		transform: scale(0);
-	}
-
-	15% {
-		transform: scale(1.25);
-	}
-
-	32% {
-		transform: scale(0.95);
-	}
-
-	50% {
-		transform: scale(1);
-		opacity: 1;
-	}
-
-	to {
-		transform: scale(1);
-		opacity: 1;
-	}
-}
-
-
-.unliked .like-icon-state {
-	opacity: 0;
-	animation: 1.2s unlike-animation both cubic-bezier(0.45, 0.05, 0.55, 0.95);
-}
-
-@keyframes unlike-animation {
-	0% {
-		transform: scale(0);
-	}
-
-	15% {
-		transform: scale(1.1);
-	}
-
-	30% {
-		transform: scale(0.98);
-	}
-
-	45% {
-		transform: scale(1);
-		opacity: 1;
-	}
-
-	to {
-		transform: scale(1);
-		opacity: 1;
-	}
-}
-
-
-.liked {
-	background: #FFF;
-	animation: 1.2s liked-bg-animation both;
-}
-
-@keyframes liked-bg-animation {
-	0% {
-		transform: scale(0);
-	}
-
-	15% {
-		transform: scale(1.1);
-	}
-
-	30% {
-		transform: scale(0.95);
-	}
-
-	50% {
-		transform: scale(1);
-		opacity: 1;
-	}
-
-	to {
-		transform: scale(1);
-		opacity: 1;
-	}
-}
-
-
-.unliked {
-	animation: 1.2s unliked-bg-animation both;
-}
-
-@keyframes unliked-bg-animation {
-	0% {
-		transform: scale(0);
-	}
-
-	10% {
-		transform: scale(0.7);
-	}
-
-	30% {
-		transform: scale(0.95);
-	}
-
-	50% {
-		transform: scale(1);
-		opacity: 1;
-	}
-
-	to {
-		transform: scale(1);
-		opacity: 1;
-	}
-}
-
-.like::before {
-	content: "";
-	display: block;
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	border-radius: 50%;
-	border: 1px solid rgba(255, 255, 255, 0.75);
-	transform: scale(0);
-}
-
-.liked::before {
-	animation: 1.2s bg-ring-animation both;
-}
-
-@keyframes bg-ring-animation {
-	0% {
-		transform: scale(0);
-		opacity: 0;
-	}
-
-	10% {
-		transform: scale(1.5);
-		opacity: 0.25;
-	}
-
-	15% {
-		transform: scale(2);
-		opacity: 0.15;
-	}
-
-	45% {
-		transform: scale(3.25);
-		opacity: 0;
-	}
-
-	to {
-		transform: scale(1);
-		opacity: 0;
-	}
-}
-
-.saving::after {
-	content: '';
-	box-sizing: border-box;
-	position: absolute;
-	top: 20%;
-	left: 20%;
-	width: 60%;
-	height: 60%;
-	border: 0.15em solid rgba(100, 100, 100, 0.5);
-	border-radius: 50%;
-	border-right-color: transparent;
-	border-top-color: transparent;
-	animation: spin-animation 400ms infinite linear;
-}
-
-@keyframes spin-animation {
-	from {
-		transform: rotate(0deg);
-	}
-
-	to {
-		transform: rotate(360deg);
-	}
-}
-
-[x-cloak] {
-    display: none !important;
-}
-
-
-body {
-  touch-action: manipulation;
-}
-
-	  </style>
-   </head>
-
-
-
-<script>
- let root = document.documentElement;
-
- function updateRealViewportDimensions() {
-   console.log(`1vh = ${window.innerHeight / 100}px`)
-   root.style.setProperty('--real-vh', (window.innerHeight / 100) + "px");
- }</script>
-<script>
-updateRealViewportDimensions()
- const vhChangeEventTypes = [
-   "scroll",
-   "resize",
-   "fullscreenchange",
-   "fullscreenerror",
-   "touchcancel",
-   "touchaction",   
-   "touchend",
-   "touchmove",
-   "touchstart",
-   "mozbrowserscroll",
-   "mozbrowserscrollareachanged",
-   "mozbrowserscrollviewchange",
-   "mozbrowserresize",
-   "MozScrolledAreaChanged",
-   "mozbrowserresize",
-   "orientationchange"
- ]
- vhChangeEventTypes.forEach(function(type) {
-   window.addEventListener(type, event => updateRealViewportDimensions());
- })
-</script> 
-<script>
-var mobile = window.matchMedia( "(max-width: 640px)" );
-var prevScrollpos = window.pageYOffset;
-window.onscroll = function() {
-  var currentScrollPos = window.pageYOffset;
-  if (prevScrollpos > currentScrollPos) {
-    document.getElementById("header").style.top = "0px";	
-  } else if (document.getElementById("header").classList.contains('headeropen') && mobile.matches){
-    document.getElementById("header").style.top = "-230px";
-  } else if (document.getElementById("header").classList.contains('headeropen')){
-    document.getElementById("header").style.top = "0px";
-  } else {
-	      document.getElementById("header").style.top = "-65px";
-
-  }
-  prevScrollpos = currentScrollPos;
-}
-</script>
-
-
-   
-   <body>
-   <div class="flex flex-col" x-data="setup()" x-init="$refs.loading.classList.add('hidden');">
-
-        <!-- Loading screen -->		 
-        <div
-                class="fixed inset-0 z-50 flex items-center w-full justify-center animate-pulse text-3xl font-bold bg-white"
-                x-ref="loading"
-        >
-		
-            <img
-                    class="h-32 w-32 mx-auto injectable" 
-                    style="filter:brightness(0.1)"
-                    src="https://postogon.com/home/assets/logo.svg"
-                    alt="postogon logo"/>
-            <div class="h-16 flex items-center mx-auto">Loading.....</div>
-        </div>
-<?php createpost(); ?>
-   
-<nav @click.away="isMobileSubMenuOpen = false" x-cloak aria-label="Secondary" :class="{'block': true}" class="block bg-white w-24 fixed flex-col-reverse z-50 flex items-center p-4 rounded-md shadow-lg bottom-64 left-0 md:hidden" x-show="isMobileSubMenuOpen" x-transition:enter="transition duration-200 ease-in-out transform sm:duration-500" x-transition:enter-end="translate-y-0 opacity-100" x-transition:enter-start="translate-x-full opacity-0" x-transition:leave="transition duration-300 ease-in-out transform sm:duration-500" x-transition:leave-end="-translate-y-full opacity-0" x-transition:leave-start="translate-y-0 opacity-100">
-                        <div class="flex space-y-2 flex-col-reverse">
-                            <!-- Notification button -->
-                            <button @click="openNotificationsPanel(); $nextTick(() => { isMobileSubMenuOpen = false })" class="p-2 bg-white transition duration-200 rounded-full focus:outline-none">
-                                <span class="sr-only">Open notifications panel</span>
-                                <svg aria-hidden="true" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="https://www.w3.org/2000/svg">
-                                    <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                                </svg>
-                            </button>
-
-                            <!-- Search button -->
-                            <button @click="openSearchPanel(); $nextTick(() => { $refs.searchInput.focus(); setTimeout(() => {isMobileSubMenuOpen= false}, 100) })" class="p-2 bg-white transition duration-200 rounded-full focus:outline-none">
-                                <span class="sr-only">Open search panel</span>
-                                <svg aria-hidden="true" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="https://www.w3.org/2000/svg">
-                                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                                </svg>
-                            </button>
-
-                            <!-- Settings button -->
-                            <button @click="openSettingsPanel(); $nextTick(() => { isMobileSubMenuOpen = false })" class="p-2 bg-white transition duration-200 rounded-full focus:outline-none">
-                                <span class="sr-only">Open settings panel</span>
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="https://www.w3.org/2000/svg">
-                                    <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                                </svg>
-                            </button>
-							
-
-							
-                        </div>
-						                       <!-- Contacts avatar button -->
-                        <div class="relative" x-data="{ open: false }">
-                            <button :aria-expanded="open ? 'true' : 'false'" @click="open = !open" aria-haspopup="true" class="block p-2 transition-opacity duration-200 rounded-full focus:outline-none" type="button" aria-expanded="false">
-                                <span class="sr-only">Contacts menu</span>
-                                <img alt="Daiyaan Ijaz" class="w-10 h-10 rounded-full"  src="https://media-exp1.licdn.com/dms/image/C4E03AQHAR1PhrwJzmg/profile-displayphoto-shrink_100_100/0/1603263069216?e=1618444800&amp;v=beta&amp;t=dFbdkrNHu3aTTc8BqAeQUqN6GQYcyYqaQncAQR_053g" onload="SVGInject(this)">
-                            </button>
-
-                            <!-- Contacts dropdown menu -->
-                            <div @click.away="open = false" aria-label="Contacts menu" aria-orientation="vertical" class="absolute z-50 left-4 w-48 py-2 top-12 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5" role="menu" x-show="open" x-transition:enter="transition-all transform ease-out" x-transition:enter-end="translate-y-0 opacity-100" x-transition:enter-start="translate-y-1/2 opacity-0" x-transition:leave="transition-all transform ease-in" x-transition:leave-end="translate-y-1/2 opacity-0" x-transition:leave-start="translate-y-0 opacity-100" style="display: none;">
-                                <a class="block px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-100" href="#" role="menuitem">
-                                    Your Profile
-                                </a>
-                                <a class="block px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-100" href="#" role="menuitem">
-                                    Settings
-                                </a>
-                                <a class="block px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-100" href="#" role="menuitem">
-                                    Logout
-                                </a>
-                            </div>
-                        </div>	
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Postogon - Enter or Join</title>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+    </head>
+	    <style>
+		  .modal {
+		    transition: opacity 0.25s ease;
+		  }
+		    body.modal-active {
+			  overflow-x: hidden;
+			  overflow-y: visible !important;
+		  }
+	    </style>
  
-                    </nav>
-   
-<!-- mobile button for more options -->
-        <button
-                @click="isMobileSubMenuOpen = !isMobileSubMenuOpen"
-                class="bg-white z-50" 
-        >
-            <span class="sr-only">Open sub menu</span>
-			<span aria-hidden="true">		
-<div class="fixed flex flex-col-reverse w-12 h-12 bg-white z-50 rounded-full shadow cursor-pointer right-6 bottom-44 p-1 transition   hover:text-gray-400 hover:bg-gray-600 md:hidden focus:outline-none focus:ring ">
-
-			<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="https://www.w3.org/2000/svg">
-                <path d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"></path>
-            </svg>
-            </span>			
-    </div>
-</button>
-	
-	
-	
-
-<!-- main content goes here, in between the header and footer -->
-	  <main class="flex-1 post" style="-webkit-overflow-scrolling:touch">
+<body class="">
 
 
-	  
-<!-- posts -->
-<?php post(5);?>
-<div
-	x-data="noticesHandler()"
-	class="fixed inset-0 flex flex-col-reverse left-4 bottom-16 z-20 items-start justify-start"
-	@notice.window="add($event.detail)"
-	style="pointer-events:none">
-	<template x-for="notice of notices" :key="notice.id">
-		<div
-			x-show="visible.includes(notice)"
-			x-transition:enter="transition ease-in duration-200"
-			x-transition:enter-start="transform opacity-0 translate-y-2"
-			x-transition:enter-end="transform opacity-100"
-			x-transition:leave="transition ease-out duration-500"
-			x-transition:leave-start="transform translate-x-0 opacity-100"
-			x-transition:leave-end="transform -translate-x-full opacity-0"
-			@click="remove(notice.id)"
-			class="rounded mb-4 mr-6 w-56 bg-white text-white h-16 flex items-center justify-center shadow-lg font-bold text-lg cursor-pointer"
-			:class="{
-				'bg-white text-black text-gray-900': notice.type === 'copy',
-				'bg-white': notice.type === 'saved',
-				'bg-blue-500 text-white': notice.type === 'download',
-				'bg-red-500 text-white': notice.type === 'like',
-			 }"
-			 
-			style="pointer-events:all"
-			x-text="notice.text">
-		</div>
-	</template>
-</div>
-	      <div class="text-center mt-10 mb-44">
-        <button class="border border-gray-300 text-gray-400 px-4 py-2 rounded-full transition focus:outline-none animate-bounce hover:bg-gray-600 focus:opacity-0 hover:text-white">Show More</button>
+
+
+
+    <div class="container h-screen absolute ">
+
+
+
+      <div class="relative max-w-md hidden float-right md:pt-8 pl-18 lg:block md:pr-36">
+        <input class="form-control mr-sm-2 search-bar bg-purple-white shadow rounded border-0 p-3 inset-x-0 top-0 " type="search" placeholder="Search" aria-label="Search" required>
       </div>
-		</main>
-<script>
-function noticesHandler() {
-	return {
-		notices: [],
-		visible: [],
-		add(notice) {
-			notice.id = Date.now()
-			this.notices.push(notice)
-			this.fire(notice.id)
-		},
-		fire(id) {
-			this.visible.push(this.notices.find(notice => notice.id == id))
-			const timeShown = 2000 * this.visible.length
-			setTimeout(() => {
-				this.remove(id)
-			}, timeShown)
-		},
-		remove(id) {
-			const notice = this.visible.find(notice => notice.id == id)
-			const index = this.visible.indexOf(notice)
-			this.visible.splice(index, 1)
-		},
-		
-	};
-}
 
-</script>
+	                          <div class="block lg:hidden text-2xl text-gray-800 tracking-wide ml-2 font-semibold"><a href="index.php"> 	  	  	              <object data="assets/logo.svg" class="inline-block md:hidden h-8" style="filter:brightness(0.1)"></object>
+Postogon</a></div>
+      <div class="md:mx-56 hidden lg:block md:ml-8 pt-10 md:pl-10 font-semibold text-6xl md:text-7xl"><a href="index.php"> Postogon</a></div>
+      <br>
 
-
-
-
-
-	  <footer class="bg-white border-t border-gray-300 inset-x-0 bottom-0 text-center z-50 flex lg:hidden" id="footer">
-<a href="." class="flex flex-col flex-grow items-center justify-center
-			overflow-hidden whitespace-no-wrap text-sm transition-colors
-			duration-100 ease-in-out hover:bg-gray-200 focus:text-orange-500">
-
-			<svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-				<circle cx="12" cy="12" r="3"></circle>
-				<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83
-					2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65
-					0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0
-					0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2
-					2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0
-					0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0
-					4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2
-					0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0
-					1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1
-					1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0
-					0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0
-					1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0
-					0-1.51 1z"></path>
-			</svg>
-
-<a href="." class="flex flex-col flex-grow items-center justify-center
-			overflow-hidden whitespace-no-wrap text-sm transition-colors
-			duration-100 ease-in-out hover:bg-gray-200 text-orange-500">
-
-<svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-activity">
-	<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-	<polyline points="9 22 9 12 15 12 15 22"></polyline>
-</svg>
-
-			<span class="text-sm capitalize">home</span>
-		</a>
-
-			<span class="hidden text-sm capitalize">settings</span>
-		</a>
-
-<a href="./profile" class="flex flex-col flex-grow items-center justify-center
-			overflow-hidden whitespace-no-wrap text-sm transition-colors
-			duration-100 ease-in-out hover:bg-gray-200 focus:text-orange-500">
-
-<svg xmlns="https://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c3.032 0 5.5 2.467 5.5 5.5 0 1.458-.483 3.196-3.248 5.59 4.111 1.961 6.602 5.253 7.482 8.909h-19.486c.955-4.188 4.005-7.399 7.519-8.889-1.601-1.287-3.267-3.323-3.267-5.61 0-3.033 2.468-5.5 5.5-5.5zm0-2c-4.142 0-7.5 3.357-7.5 7.5 0 2.012.797 3.834 2.086 5.182-5.03 3.009-6.586 8.501-6.586 11.318h24c0-2.791-1.657-8.28-6.59-11.314 1.292-1.348 2.09-3.172 2.09-5.186 0-4.143-3.358-7.5-7.5-7.5z"/></svg>
-
-			<span class="hidden text-sm capitalize">settings</span>
-		</a>
-		
-	  </footer>
-
-	  </div>	  
+	              <object data="assets/logo.svg"	class="hidden md:block max-w-sm relative md:max-w-xs right-40" style="filter:brightness(0.1)"></object>
 	  
-
-
-
-
-
-	  <script>
+      <br>
+      <img src="./assets/img/index-guy.png" class="hidden lg:block relative lg:max-w-lg md:max-w-md bottom-80">
 	  
-var scrollPos;
+      
 
-function download(url, postid, scrollPos){
-  var a = $("<a style='display:none'>")
-  .attr("href", url)
-  .attr("download", postid +".png")
-  .appendTo("#"+postid);
-  a[0].click();
+    </div>
+    <div class="container ml-auto mx-auto md:mr-24 relative p-12 lg:top-40 max-w-lg">
+	                <input class="w-full block md:hidden h-16 px-3 rounded mb-8 focus:outline-none focus:shadow-outline text-xl px-8 shadow-lg" type="search" placeholder="Search...">
+      <h1 class="font-semibold text-5xl pb-5 text-center md:text-left">Enter</h1>
+<form>
+  <div class="mb-4">
+    <label class="block text-md font-light mb-2" for="email">Email</label>
+    <input class="w-full bg-drabya-gray border-gray-500 appearance-none border p-4 font-light leading-tight focus:outline-none focus:shadow-outline" type="text" name="email" id="" placeholder="Email">
+  </div>
+  <div class="mb-4">
+    <label class="block text-md font-light mb-2" for="password">Password</label>
+    <input class="w-full bg-drabya-gray border-gray-500 appearance-none border p-4 font-light leading-tight focus:outline-none focus:shadow-outline" type="password" name="password" id="" placeholder="Password">
+  </div>
 
-  a.remove();
+  <div class="flex items-center justify-between mb-5">
+    <a href="/home" class="bg-indigo-600 flex-initial justify-items-start hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded focus:outline-none focus:shadow-outline" type="button">
+      Log In
+    </a>
+    <a class="inline-block align-baseline font-light text-sm text-indigo-600 hover:text-indigo-500" href="forgotpass.php">
+      Forgot Password?
+    </a>
+  </div>
+  <p class="text-center text-md font-light">Don't have an account? <button class="modal-open font-light text-md text-indigo-600">Get Started</button></p>
+</form>  
 
-            window.scrollTo(0,scrollPos);
+      <div class="md:flex justify-between items-center pt-20 text-sm">
+        <div class="text-center md:text-left py-3  mx-auto border-b md:border-b-0">
+		<div class="text-gray-500 text-center md:mr-4">&copy; 2020 Postogon</div>
+        </div>
 
+        <div class="md:flex md:flex-row-reverse items-center">
+          <div class="text-center mb-4 md:mb-0 md:flex">
+            <div class="w-48 inline-block relative mb-4 mt-4 md:mt-0 md:mb-0 md:mr-4">
+		  <a href="#" class="text-gray-500 mr-3">Jobs</a>
+		  <a href="#" class="text-gray-500 mr-3">Legal</a>
+		  <a href="#" class="text-gray-500 mr-3">Privacy</a>
+            </div>
+            <div>
+            </div>
+          </div>
 
-		  
-}
+        </div>
+      </div>
 
-
-//i couldn't figure out how to just capture the elements width, for now its set to save the windows screen. a suggestion for later would be to use iframe and capture that elements window.
-function saveCapture(element, postid, scrollPos) {
-
-
-	//fixes bug for screenshotting
-	    window.scrollTo(0,0);
-
+</div>  
+    
 	
-  html2canvas(element, {
-	  useCORS: true,
-	    backgroundColor: null,
-		allowTaint: true,
-        scrollX: -window.scrollX,
-        scrollY: -window.scrollY,
-        windowWidth: element.offsetWidth,
-        windowHeight: document.documentElement.offsetHeight
+<div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+		<div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
+        <div class="modal-container w-11/12 md:max-w-md mx-auto rounded z-50 overflow-y-auto">
+		
+			<div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50"><svg class="fill-current text-white" xmlns="https://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg><span class="text-sm">(Esc)</span></div>
 
-	  }).then(function(canvas) {
-        var ctx = canvas.getContext('2d');
+			<div class="modal-content py-4 text-left px-6">
+		
+				
+    <div class="inline-block container align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+      <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        <div class="sm:flex sm:items-start">
+          <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100 sm:mx-0 sm:h-10 sm:w-10">
+          </div>
+          <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+              Register account
+            </h3>
+            <div class="mt-2">
+                  <form class="pt-6 pb-2 my-2">
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold mb-2" for="username">
+                            Username
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="username" type="text" placeholder="Username">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold mb-2" for="email">
+                            Email Address
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" id="email" type="email" placeholder="Email Address">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold mb-2" for="password">
+                            Password
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3" id="password" type="password" placeholder="Password">
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+        <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
+          Register
+        </button>
+        <button type="button" class="modal-close mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+          Cancel
+        </button>
+      </div>
+    </div>
+			  
 
-        ctx.webkitImageSmoothingEnabled = false;
-        ctx.mozImageSmoothingEnabled = false;
-        ctx.imageSmoothingEnabled = false;
+				
+			</div>
 
-    download(canvas.toDataURL("image/png"), postid, scrollPos);
-  })
-}
-
-function btnDownload(id){
-var postid = id;
-
-	//get current scroll pos
-	scrollPos = document.body.scrollTop;
-
-var element = document.getElementById(postid);
-saveCapture(element, postid, scrollPos)
-}
-</script>  
-   </body>
-   
-   <script>
-    $('textarea').each(function () {
-        this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
-    }).on('input', function () {
-        this.style.height = 'auto';
-        this.style.height = (this.scrollHeight) + 'px';
-    });
-    $("#ready").hide();
-
-    $('#text').on('input propertychange', function () {
-        if ($(this).val() !== "") {
-            $("#submitpost").removeClass("p-1 px-4 cursor-not-allowed font-semibold text-white transition transition-colors bg-red-500 rounded-md btn duration-200  focus:outline-none");
-            $("#submitpost").addClass("p-1 px-4 font-semibold text-white transition transition-colors bg-red-500 rounded-md cursor-pointer btn duration-200  focus:outline-none");
-			document.getElementById("submitpost").disabled = false;        
-		}
-        else {
-            $("#submitpost").removeClass("p-1 px-4 font-semibold text-white transition transition-colors bg-red-500 rounded-md cursor-pointer btn duration-200 focus:outline-none");
-            $("#submitpost").addClass("p-1 px-4 cursor-not-allowed font-semibold text-white transition transition-colors bg-red-500 rounded-md btn duration-200 focus:outline-none");
-			document.getElementById("submitpost").disabled = true;        
-		}
-    });	
-</script>
-
-<script>
-
-
- const setup = () => {
-       return {
-            loading: true,
-		isMobileSubMenuOpen: false,
-		openMobileSubMenu() {
-			this.isMobileSubMenuOpen = true
-			this.$nextTick(() => {
-				this.$refs.mobileSubMenu.focus()
-			})
-		},
-	}
-}
-</script>
-
-
-<script>
-    //define
-    const delay = ms => new Promise(res => setTimeout(res, ms));
-
-
-    window.addEventListener('load', (event) => {
-        swap();
-    });
-
-
-    const swap = async () => {
-        await delay(500);
-        //puts all posts with id skeleton post into an array, one for each normal post
-        var divs = document.querySelectorAll('#skeletonpost');
-        for (var i = 0; i < divs.length; i++) {
-            //i is index of each, it loops until its empty
-            divs[i].classList.add('hidden');
-        }
-
-
-
-
-        var divs = document.querySelectorAll('#preload');
-        for (var i = 0; i < divs.length; i++) {
-            //i is index of each, it loops until its empty
-            divs[i].classList.remove('invisible');
-            divs[i].classList.add('hidden');
-        }
-
-        var divs = document.querySelectorAll('#normalpost');
-        for (var i = 0; i < divs.length; i++) {
-            //i is index of each, it loops until its empty
-            divs[i].classList.remove('hidden');
-        }
-
+		</div>
+		
+    </div>
+	
+	
+	  <script>
+    var openmodal = document.querySelectorAll('.modal-open')
+    for (var i = 0; i < openmodal.length; i++) {
+      openmodal[i].addEventListener('click', function(event){
+    	event.preventDefault()
+    	toggleModal()
+      })
+    }
+    
+    const overlay = document.querySelector('.modal-overlay')
+    overlay.addEventListener('click', toggleModal)
+    
+    var closemodal = document.querySelectorAll('.modal-close')
+    for (var i = 0; i < closemodal.length; i++) {
+      closemodal[i].addEventListener('click', toggleModal)
+    }
+    
+    document.onkeydown = function(evt) {
+      evt = evt || window.event
+      var isEscape = false
+      if ("key" in evt) {
+    	isEscape = (evt.key === "Escape" || evt.key === "Esc")
+      } else {
+    	isEscape = (evt.keyCode === 27)
+      }
+      if (isEscape && document.body.classList.contains('modal-active')) {
+    	toggleModal()
+      }
     };
-</script>
-  <script>
-    SVGInject(document.querySelectorAll("img.injectable"));
+    
+    
+    function toggleModal () {
+      const body = document.querySelector('body')
+      const modal = document.querySelector('.modal')
+      modal.classList.toggle('opacity-0')
+      modal.classList.toggle('pointer-events-none')
+      body.classList.toggle('modal-active')
+    }
+    
+     
   </script>
-  
+	
+</body>
 
-  
+
+
+
+
+
+
+
 
 </html>
