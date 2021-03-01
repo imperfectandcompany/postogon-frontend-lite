@@ -26,7 +26,7 @@ function post($amt)
 <html>
    <head>
       <meta charset="utf-8"/>
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, minimal-ui"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, minimal-ui" id="viewportMeta" />
       <title>Home - Postogon</title>
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -484,7 +484,7 @@ window.onscroll = function() {
 <?php post(5);?>
 <div
 	x-data="noticesHandler()"
-	class="fixed inset-0 flex flex-col-reverse left-4 bottom-16 z-2 items-start justify-start"
+	class="fixed inset-0 flex flex-col-reverse left-4 bottom-16 z-20 items-start justify-start"
 	@notice.window="add($event.detail)"
 	style="pointer-events:none">
 	<template x-for="notice of notices" :key="notice.id">
@@ -583,7 +583,7 @@ function noticesHandler() {
 			<span class="hidden text-sm capitalize">settings</span>
 		</a>
 
-<a href="." class="flex flex-col flex-grow items-center justify-center
+<a href="./profile" class="flex flex-col flex-grow items-center justify-center
 			overflow-hidden whitespace-no-wrap text-sm transition-colors
 			duration-100 ease-in-out hover:bg-gray-200 focus:text-orange-500">
 
@@ -603,38 +603,61 @@ function noticesHandler() {
 
 	  <script>
 	  
+var scrollPos;
 
-function download(url){
+function download(url, postid, scrollPos){
   var a = $("<a style='display:none'>")
   .attr("href", url)
-  .attr("download", "test.png")
-  .appendTo("body");
-
+  .attr("download", postid +".png")
+  .appendTo("#"+postid);
   a[0].click();
 
   a.remove();
+
+            window.scrollTo(0,scrollPos);
+
+
+		  
 }
 
 
 //i couldn't figure out how to just capture the elements width, for now its set to save the windows screen. a suggestion for later would be to use iframe and capture that elements window.
-function saveCapture(element) {
+function saveCapture(element, postid, scrollPos) {
+
+
+	//fixes bug for screenshotting
+	    window.scrollTo(0,0);
+
+	
   html2canvas(element, {
 	  useCORS: true,
-	  width: window.screen.availWidth,
-	  height: window.screen.availHeight,
-	  windowWidth: element.scrollWidth,
-	  WindowHeight: element.scrollHeight,
-	  x: 0,
-	  y: window.pageYOffset
+	    backgroundColor: null,
+		allowTaint: true,
+        scrollX: -window.scrollX,
+        scrollY: -window.scrollY,
+        windowWidth: element.offsetWidth,
+        windowHeight: document.documentElement.offsetHeight
+
+
 	  }).then(function(canvas) {
-    download(canvas.toDataURL("image/png"));
+        var ctx = canvas.getContext('2d');
+
+        ctx.webkitImageSmoothingEnabled = false;
+        ctx.mozImageSmoothingEnabled = false;
+        ctx.imageSmoothingEnabled = false;
+
+    download(canvas.toDataURL("image/png"), postid, scrollPos);
   })
 }
 
 function btnDownload(id){
 var postid = id;
+
+	//get current scroll pos
+	scrollPos = document.body.scrollTop;
+
 var element = document.getElementById(postid);
-saveCapture(element)
+saveCapture(element, postid, scrollPos)
 }
 </script>  
    </body>

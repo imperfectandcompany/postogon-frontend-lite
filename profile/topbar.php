@@ -3,7 +3,7 @@
             <div class="flex justify-end flex-shrink-0 px-6 py-4 border-b border-gray-300">
 			<div class="flex mr-auto">
                <a href="./"><img class="h-8 w-8" style="filter:brightness(0.1)" src="https://postogon.com/home/assets/logo.svg" alt="postogon logo"/></a>
-			   <h1 class="px-6 text-xl font-semibold cursor-pointer">Home</h1>
+			   <h1 class="px-6 text-xl font-semibold cursor-pointer">Profile</h1>
 			   </div>
 			   <div class="flex ">
                <button @click="open = !open" :aria-expanded="open ? 'true' : 'false'" :class="{'font-semibold': open, 'active': open}" class="p-1 px-2 font-semibold text-white transition duration-200 bg-red-500 rounded-md cursor-pointer focus:outline-none" aria-expanded="false">
