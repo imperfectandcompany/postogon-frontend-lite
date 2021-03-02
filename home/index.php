@@ -489,32 +489,28 @@ window.onscroll = function() {
 </button>
 	
 	
-	
+	<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
 
 <!-- main content goes here, in between the header and footer -->
 	  <main class="flex-1 post" style="-webkit-overflow-scrolling:touch">
+<script>
+	document.addEventListener( 'DOMContentLoaded', function () {
+var elms = document.getElementsByClassName( 'splide' );
+for ( var i = 0, len = elms.length; i < len; i++ ) {
+	new Splide( elms[ i ], {
+	arrows: false,
+} ).mount();
+}
+	} );
 
+</script>
 
-	  
-<!-- posts -->
-        <div id="ptr">
-         <div
-                class="z-50 flex items-center w-full justify-center animate-pulse  font-bold bg-white"
-               
-        >
-		
-            <img
-                    class="h-8 w-8 mx-auto " 
-                    style="filter:brightness(0.1)"
-                    src="../assets/logo.svg"
-                    alt="postogon logo"/>
-            <div class="h-16 flex items-center mx-auto">Pull to refresh</div>
-        </div>
-        </div>
 		
 		
-<div id="content" class="mt-6">
-<?php post(5);?>
+<div  class="mt-6">
+<?php post(6);?>
 </div>
 <div
 	x-data="noticesHandler()"
@@ -686,10 +682,9 @@ function saveCapture(element, postid, scrollPos) {
 
 function btnDownload(id){
 var postid = id;
-
 	//get current scroll pos
 	scrollPos = document.body.scrollTop;
-
+document.getElementById(postid);
 var element = document.getElementById(postid);
 saveCapture(element, postid, scrollPos)
 }
