@@ -3,7 +3,7 @@
 
 
         <div class="flex-grow">
-		<div class="top-0 sticky bg-white border-b border-1 border-gray-200 ">
+		<div class="top-0 sticky z-20  bg-white border-b border-1 border-gray-200 ">
             <div class="flex py-4  text-4xl font-bold">Messages</div>
 
 	<div class="splide">
@@ -23,7 +23,7 @@
                 <input class="p-3 w-full bg-gray-200 hover:opacity-75 transition rounded-lg ring-inset focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:opacity-50" type="text" placeholder="Search For Contacts..." />
             </div>
 			</div>
-			<div class="overflow-y-auto">
+			<div class="overflow-y-auto bg-white">
             <div class="flex m-3 bg-white-300 p-2 rounded-lg shadow-md">
 					<div class="flex-none my-auto">
 					<div class="flex-none m-2 ">
