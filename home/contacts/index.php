@@ -1,22 +1,23 @@
 <?php
-function topbar()
+function createpost()
 {
-    include_once("topbar.php");
+    include_once("createpost.php");
 }
 
-function request($amt)
+function post($amt)
 {
     $i = 0;
 
     while ($i < $amt) {
-        include("request.php");
+        include("skeleton.php");
         $i++;
     }
 
     $i = 0;
 
     while ($i < $amt) {
-        include("request.php");
+		$postid = 'postid_'.$i.'';
+        include("post.php");
         $i++;
     }
 
@@ -25,8 +26,8 @@ function request($amt)
 <html>
    <head>
       <meta charset="utf-8"/>
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, minimal-ui"/>
-      <title>Contacts - Postogon</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, minimal-ui" id="viewportMeta" />
+      <title>Home - Postogon</title>
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -35,10 +36,13 @@ function request($amt)
          href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
          rel="stylesheet"
          />
-  <script src="../../assets/scripts/svg-inject.min.js"></script>			 
+  <script src="../assets/scripts/svg-inject.min.js"></script>		 
+  <!-- post download script -->
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>  
 <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@1.x.x/dist/alpine-clipboard.js"></script>		 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>		 
-      <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+       <script src="../assets/scripts/pull-to-reload.js"></script>    
+	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
       <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
       <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.5.x/dist/component.min.js"></script>
       <script defer src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.min.js"></script>
@@ -86,9 +90,8 @@ main {
 }
 
 .like {
-	display: inline-block;
-	width: 2rem;
-	height: 2rem;
+	width: 1.5rem;
+	height: 1.5rem;
 	border-radius: 50%;
 	background: #FFF;
 	position: relative;
@@ -327,6 +330,21 @@ body {
 }
 
 	  </style>
+   <script>
+            var ptr;
+
+            document.addEventListener("DOMContentLoaded", function() {
+                ptr = new PullToReload({ 
+                    'callback-loading': function(){
+                        setTimeout(function(){
+                            ptr.loadingEnd();
+                        }, 3000);
+                    }
+                });
+                
+            });
+
+        </script>
    </head>
 
 
@@ -383,7 +401,7 @@ window.onscroll = function() {
 
 
    
-   <body>
+   <body class="bg-gray-100">
    <div class="flex flex-col" x-data="setup()" x-init="$refs.loading.classList.add('hidden');">
 
         <!-- Loading screen -->		 
@@ -395,13 +413,13 @@ window.onscroll = function() {
             <img
                     class="h-32 w-32 mx-auto injectable" 
                     style="filter:brightness(0.1)"
-                    src="../../assets/logo.svg"
+                    src="../assets/logo.svg"
                     alt="postogon logo"/>
             <div class="h-16 flex items-center mx-auto">Loading.....</div>
         </div>
-<?php topbar(); ?>
+<?php createpost(); ?>
    
-<nav @click.away="isMobileSubMenuOpen = false" x-cloak aria-label="Secondary" :class="{'block': true}" class="block bg-white w-24 fixed flex-col-reverse z-50 flex items-center p-4 rounded-md shadow-lg bottom-64 right-0 md:hidden" x-show="isMobileSubMenuOpen" x-transition:enter="transition duration-200 ease-in-out transform sm:duration-500" x-transition:enter-end="translate-y-0 opacity-100" x-transition:enter-start="translate-x-full opacity-0" x-transition:leave="transition duration-300 ease-in-out transform sm:duration-500" x-transition:leave-end="-translate-y-full opacity-0" x-transition:leave-start="translate-y-0 opacity-100">
+<nav @click.away="isMobileSubMenuOpen = false" x-cloak aria-label="Secondary" :class="{'block': true}" class="block bg-white w-24 fixed flex-col-reverse z-50 flex items-center p-4 rounded-md shadow-lg bottom-64 left-0 md:hidden" x-show="isMobileSubMenuOpen" x-transition:enter="transition duration-200 ease-in-out transform sm:duration-500" x-transition:enter-end="translate-y-0 opacity-100" x-transition:enter-start="translate-x-full opacity-0" x-transition:leave="transition duration-300 ease-in-out transform sm:duration-500" x-transition:leave-end="-translate-y-full opacity-0" x-transition:leave-start="translate-y-0 opacity-100">
                         <div class="flex space-y-2 flex-col-reverse">
                             <!-- Notification button -->
                             <button @click="openNotificationsPanel(); $nextTick(() => { isMobileSubMenuOpen = false })" class="p-2 bg-white transition duration-200 rounded-full focus:outline-none">
@@ -439,7 +457,7 @@ window.onscroll = function() {
                             </button>
 
                             <!-- Contacts dropdown menu -->
-                            <div @click.away="open = false" aria-label="Contacts menu" aria-orientation="vertical" class="absolute z-50 right-0 w-48 py-1 top-12 origin-top-left bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5" role="menu" x-show="open" x-transition:enter="transition-all transform ease-out" x-transition:enter-end="translate-y-0 opacity-100" x-transition:enter-start="translate-y-1/2 opacity-0" x-transition:leave="transition-all transform ease-in" x-transition:leave-end="translate-y-1/2 opacity-0" x-transition:leave-start="translate-y-0 opacity-100" style="display: none;">
+                            <div @click.away="open = false" aria-label="Contacts menu" aria-orientation="vertical" class="absolute z-50 left-4 w-48 py-2 top-12 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5" role="menu" x-show="open" x-transition:enter="transition-all transform ease-out" x-transition:enter-end="translate-y-0 opacity-100" x-transition:enter-start="translate-y-1/2 opacity-0" x-transition:leave="transition-all transform ease-in" x-transition:leave-end="translate-y-1/2 opacity-0" x-transition:leave-start="translate-y-0 opacity-100" style="display: none;">
                                 <a class="block px-4 py-2 text-sm text-gray-700 transition hover:bg-gray-100" href="#" role="menuitem">
                                     Your Profile
                                 </a>
@@ -471,18 +489,32 @@ window.onscroll = function() {
 </button>
 	
 	
-	
+	<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
 
 <!-- main content goes here, in between the header and footer -->
-	  <main class="flex-1" style="-webkit-overflow-scrolling:touch">
-<!-- posts -->
+	  <main class="flex-1 post" style="-webkit-overflow-scrolling:touch">
+<script>
+	document.addEventListener( 'DOMContentLoaded', function () {
+var elms = document.getElementsByClassName( 'splide' );
+for ( var i = 0, len = elms.length; i < len; i++ ) {
+	new Splide( elms[ i ], {
+	arrows: false,
+} ).mount();
+}
+	} );
 
+</script>
 
-<?php request(5);?>
-
+		
+		
+<div  class="mt-6">
+<?php post(6);?>
+</div>
 <div
 	x-data="noticesHandler()"
-	class="fixed inset-0 flex flex-col-reverse left-4 bottom-16 z-2 items-start justify-start"
+	class="fixed inset-0 flex flex-col-reverse left-4 bottom-16 z-20 items-start justify-start"
 	@notice.window="add($event.detail)"
 	style="pointer-events:none">
 	<template x-for="notice of notices" :key="notice.id">
@@ -502,6 +534,7 @@ window.onscroll = function() {
 				'bg-blue-500 text-white': notice.type === 'download',
 				'bg-red-500 text-white': notice.type === 'like',
 			 }"
+			 
 			style="pointer-events:all"
 			x-text="notice.text">
 		</div>
@@ -574,13 +607,13 @@ function noticesHandler() {
 	<polyline points="9 22 9 12 15 12 15 22"></polyline>
 </svg>
 
-			<span class="hidden text-sm capitalize">home</span>
+			<span class="text-sm capitalize">home</span>
 		</a>
 
 			<span class="hidden text-sm capitalize">settings</span>
 		</a>
 
-<a href="." class="flex flex-col flex-grow items-center justify-center
+<a href="./profile" class="flex flex-col flex-grow items-center justify-center
 			overflow-hidden whitespace-no-wrap text-sm transition-colors
 			duration-100 ease-in-out hover:bg-gray-200 focus:text-orange-500">
 
@@ -593,6 +626,69 @@ function noticesHandler() {
 
 	  </div>	  
 	  
+
+
+
+
+
+	  <script>
+	  
+var scrollPos;
+
+function download(url, postid, scrollPos){
+  var a = $("<a style='display:none'>")
+  .attr("href", url)
+  .attr("download", postid +".png")
+  .appendTo("#"+postid);
+  a[0].click();
+
+  a.remove();
+
+            window.scrollTo(0,scrollPos);
+
+
+		  
+}
+
+
+//i couldn't figure out how to just capture the elements width, for now its set to save the windows screen. a suggestion for later would be to use iframe and capture that elements window.
+function saveCapture(element, postid, scrollPos) {
+
+
+	//fixes bug for screenshotting
+	    window.scrollTo(0,0);
+
+	
+  html2canvas(element, {
+	  useCORS: true,
+	    backgroundColor: null,
+		allowTaint: true,
+        scrollX: -window.scrollX,
+        scrollY: -window.scrollY,
+        windowWidth: element.offsetWidth,
+        windowHeight: document.documentElement.offsetHeight
+
+
+	  }).then(function(canvas) {
+        var ctx = canvas.getContext('2d');
+
+        ctx.webkitImageSmoothingEnabled = false;
+        ctx.mozImageSmoothingEnabled = false;
+        ctx.imageSmoothingEnabled = false;
+
+    download(canvas.toDataURL("image/png"), postid, scrollPos);
+  })
+}
+
+function btnDownload(id){
+var postid = id;
+	//get current scroll pos
+	scrollPos = document.body.scrollTop;
+document.getElementById(postid);
+var element = document.getElementById(postid);
+saveCapture(element, postid, scrollPos)
+}
+</script>  
    </body>
    
    <script>
@@ -676,5 +772,8 @@ function noticesHandler() {
   <script>
     SVGInject(document.querySelectorAll("img.injectable"));
   </script>
+  
+
+  
 
 </html>
