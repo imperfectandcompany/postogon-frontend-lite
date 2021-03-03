@@ -4,7 +4,7 @@
         <title>Postogon - Enter or Join</title>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover, minimal-ui" id="viewportMeta" />
 		<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
     </head>
@@ -22,7 +22,7 @@
 
 
 
-
+    <div class="container h-screen  ">
 
     <div class="container h-screen absolute ">
 
@@ -93,14 +93,14 @@
   </div>
 
   <div class="flex items-center justify-between mb-5">
-    <a href="./home" class="bg-indigo-600 flex-initial justify-items-start hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded focus:outline-none focus:shadow-outline" type="button">
+    <a href="./home" class="bg-indigo-600 flex-initial justify-items-start hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded focus:outline-none focus:shadow-outline">
       Log In
     </a>
     <a class="inline-block align-baseline font-light text-sm text-indigo-600 hover:text-indigo-500" href="forgotpass.php">
       Forgot Password?
     </a>
   </div>
-  <p class="text-center text-md font-light">Don't have an account? <button class="modal-open font-light text-md text-indigo-600">Get Started</button></p>
+  <p class="text-center text-md font-light">Don't have an account? <button class="modal-open focus:outline-none font-light text-md text-indigo-600">Get Started</button></p>
 </form>  
 
 
@@ -231,7 +231,7 @@
     
      
   </script>
-	
+	    </div>
 </body>
 
 
