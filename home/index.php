@@ -1,4 +1,7 @@
 <?php
+
+
+
 function createpost()
 {
     include_once("createpost.php");
@@ -6,6 +9,8 @@ function createpost()
 
 function post($amt)
 {
+	
+			include_once("classes/profile.class.php");
     $i = 0;
 
     while ($i < $amt) {
@@ -14,6 +19,23 @@ function post($amt)
     }
 
     $i = 0;
+
+foreach($profiles as $profile){
+		$name = $profiles[$i]->name;
+		$post = $profiles[$i]->post;		
+		$postlikes = $profiles[$i]->postlikes;
+		$message = $profiles[$i]->message;
+		$bio = $profiles[$i]->bio;
+		$status = $profiles[$i]->status;
+		$postcount = $profiles[$i]->postcount;
+		$followers = $profiles[$i]->followers;
+		$activity = $profiles[$i]->activity;
+		$avatar = $profiles[$i]->avatar;
+		$contacts = $profiles[$i]->contacts;
+		$uid = $profiles[$i]->uid;
+		$username = $profiles[$i]->username;
+		$i++;		
+}
 
     while ($i < $amt) {
 		$postid = 'postid_'.$i.'';
@@ -401,7 +423,7 @@ window.onscroll = function() {
 
 
    
-   <body class="bg-gray-100">
+   <body class="bg-white">
    <div class="flex flex-col" x-data="setup()" x-init="$refs.loading.classList.add('hidden');">
 
         <!-- Loading screen -->		 

@@ -1,6 +1,6 @@
 
 	<div id="<?php echo $postid;?>" style="overflow-hidden h-auto">
-	<div class="bg-white rounded p-2 mb-2 shadow  px-4 py-4 hidden m-0 lg:ml-96 lg:mr-96 transition border-b  border-6" id="normalpost">
+	<div class="bg-white rounded p-2 mb-2 shadow  md:px-4 md:py-4 hidden lg:ml-44 lg:mr-44 xl:ml-96 xl:mr-96 transition border-b  border-6" id="normalpost">
 
          <div class="flex" >
 		 <div class="relative" x-data="{ open: false }">
