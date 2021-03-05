@@ -1,41 +1,53 @@
 	<div id="<?php echo $postid;?>" style="overflow-hidden h-auto">
 	<div class="bg-white rounded p-2 mb-2 shadow-sm  md:px-4 md:py-4 hidden lg:ml-44 lg:mr-44 xl:ml-96 xl:mr-96 transition  border-6" id="normalpost">
-
          <div class="flex" >
 		 <div class="relative" x-data="{ open: false }">
-            <div class="w-10 h-10 mr-3 font-bold text-center text-white bg-gray-700 bg-center bg-cover border-4 border-gray-500 rounded-full cursor-pointer hover:bg-gray-600"
+
+			<?php 
+			if(!empty($avatar)){
+				echo "<img src='../assets/img/avatars/{$avatar}.png'";;
+			} else {
+			echo "<div";
+			}?>
+			
+				class="w-10 h-10 mr-3 font-bold text-center text-white bg-gray-700 bg-center bg-cover border-4 border-gray-500 rounded-full cursor-pointer hover:bg-gray-600"
 			@click="open = !open" @click.away="open = false" :class="{'border-red-400 bg-red-200 text-red-400 hover:bg-red-300 transform transition duration-300 ': open}"
 			x-transition:enter-end="transform opacity-100 scale-100"
 			x-transition:leave="transition ease-in duration-75"
 			x-transition:leave-start="transform opacity-100 scale-100"
 			>
-               <div class="my-1 select-none">?</div>
-            </div>
+               
+			<?php 
+			if(!empty($avatar)){
+				echo '</img>';
+			} else {
+			echo "<div class='my-1 select-none'>?</div> </div>";
+			}?>
 			
 			<div class="absolute mt-6 ml-4 shadow-lg z-10 inset-y-1 text-center" x-show="open" x-transition:enter="transition duration-200 ease-in-out transform" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition-all transform ease-in duration-300" x-transition:leave-start="translate-y-0 opacity-100 scale-100" x-transition:leave-end="translate-y-full opacity-0 scale-95" style="display: none;">
 	  <div class='bg-white shadow rounded'>           
 		   <div class='mr-2 ml-2'>
-                <p class='text-blue-600 '>@<? echo $username;?></p>
-                <p class='text-gray-400 text-xs	mb-3'><? echo $bio;?></p>                
+                <p class='text-blue-600 '>@<?php echo $username;?></p>
+                <p class='text-gray-400 text-xs	mb-3'><?php echo $bio;?></p>                
 
 
 					
 	  <div class='flex items-center  mt-4'>
 
             <div class='mx-2'>
-                <p class='text-purple-900 font-bold'><? echo $postcount;?></p>
+                <p class='text-purple-900 font-bold'><?php echo $postcount;?></p>
                 <p class='text-purple-300'>Posts</p>                
             </div>
             <div class='mx-2'>
-                <p class='text-purple-900 font-bold'><? echo $followers;?>k</p>
+                <p class='text-purple-900 font-bold'><?php echo $followers;?></p>
                 <p class='text-purple-300'>Followers</p>                
             </div>
             <div class='mx-2'>
-                <p class='text-purple-900 font-bold'><? echo $activity;?>%</p>
+                <p class='text-purple-900 font-bold'><?php echo $activity;?>%</p>
                 <p class='text-purple-300'>Activity</p>                
             </div>
             <div class='mx-4'>
-                <a href="./profile/<? echo $uid;?>/" class="bg-green-400 text-green-100 px-4 py-1 rounded focus:outline-none">Profile
+                <a href="./profile/<?php echo $uid;?>/" class="bg-green-400 text-green-100 px-4 py-1 rounded focus:outline-none">Profile
 				</a>              
             </div>
         </div>
@@ -49,18 +61,17 @@
 		
 		</div>
 			
-			
-			
+
 			
             <div>
+                  <p class="mr-1 font-bold cursor-pointer hover:underline"><?php echo $name;?></p>
                <div class="flex items-center transition duration-500 transform hover:-translate-y-1">
-                  <p class="mr-1 font-bold cursor-pointer hover:underline"><?echo $name;?></p>
 
                </div>
                <div class="flex items-center mt-1 text-xs text-gray-600">
-                  <p>16 March 2021</p>
+                  <p><?php echo $postDate;?></p>
                   <p class="ml-1 mr-1">•</p>
-                  <p>9:44 pm</p>
+                  <p><?php echo $postTime;?></p>
                </div>
             </div>
             <div class="flex flex-col flex-shrink-0 ml-auto leading-none text-center">
@@ -125,7 +136,7 @@
    x-data="{ isCollapsed: false, maxLength: 140, originalContent: '', content: '' }"
    x-init="originalContent = $el.firstElementChild.textContent.trim(); content = originalContent.slice(0, maxLength)"
    >
-    <span x-text="isCollapsed ? originalContent : content"><? echo $post;?></span>
+    <span x-text="isCollapsed ? originalContent : content"><?php echo $post;?></span>
     <button class="text-blue-600 hover:text-blue-400 focus:text-blue-500 transition focus:outline-none"
       @click="isCollapsed = !isCollapsed"
       x-show="originalContent.length > maxLength"
@@ -135,7 +146,7 @@
 		 </div>
 		 
             <div class="flex flex-row-reverse">
-               <p class="text-xs text-gray-400 transition hover:text-gray-500 mb-4 mr-5"><? echo $bio;?></p>
+               <p class="text-xs text-gray-400 transition hover:text-gray-500 mb-4 mr-5"><?php echo $bio;?></p>
             </div>
 		 
 
@@ -166,19 +177,11 @@
 </svg>
 							</div>
 
+                       
 
+						  <?php if($feed === 0){ include('dlbutton.php'); } else { echo "<div class='transition animate-bounce  focus:opacity-50 focus:text-blue-500 px-2 py-2 focus:outline-none  select-none'>🔒</div>"; }?> 
 
-						    <a onclick="btnDownload('<?php echo $postid;?>')" x-data="{}" class="focus:outline-none"
-		x-on:click="open = false,$dispatch('notice', {type: 'download', text: '📥 Downloading...'})">
-		<div x-data="{ active: false }" :class="{ 'text-blue-500': active, 'hover:bg-blue-200': active }" @click.away="{active: false}" @click="active = !active" class="transition focus:outline-none focus:opacity-50 hover:bg-gray-200  focus:text-blue-500 w-8 h-8 px-2 py-2 focus:outline-none text-center rounded-full text-gray-400 cursor-pointer">                           
-		<svg xmlns="https://www.w3.org/2000/svg" fill="none"  viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-						
-                            </svg>
-				</div>
-	</a>
-
-						
+					
                     </div>
 
 				
@@ -208,7 +211,7 @@ x-on:click="$dispatch('notice', {type: 'like', text: '🤍 Updating'})"
   
                                 </div>
                     <span class="text-gray-400 ml-2">
-                        <? echo $postlikes; ?>
+                        <?php echo $postLikes; ?>
                     </span>
 
 							</div>

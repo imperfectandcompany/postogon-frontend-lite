@@ -1,44 +1,67 @@
 <?php
-
-
-
 function createpost()
 {
     include_once("createpost.php");
 }
 
-function post($amt)
+function post()
 {
+
+
+include_once('personas.php');
 	
-			include_once("classes/profile.class.php");
     $i = 0;
 
-    while ($i < $amt) {
+	foreach($profiles as $profile){
         include("skeleton.php");
         $i++;
     }
 
+$i = 0;
+
+	foreach($profiles as $profile){
+		${"name_{$i}"} = $profiles[$i]->name;
+		${"feed_{$i}"} = $profiles[$i]->feed;		
+		${"post_{$i}"} = $profiles[$i]->post;
+		${"postLikes_{$i}"} = $profiles[$i]->postLikes;
+		${"postDate_{$i}"} = $profiles[$i]->postDate;
+		${"postTime_{$i}"} = $profiles[$i]->postTime;			
+		${"message_{$i}"} = $profiles[$i]->message;
+		${"messageDate_{$i}"} = $profiles[$i]->message;		
+		${"bio_{$i}"} = $profiles[$i]->bio;
+		${"status_{$i}"} = $profiles[$i]->status;
+		${"postcount_{$i}"} = $profiles[$i]->postcount;
+		${"followers_{$i}"} = $profiles[$i]->followers;
+		${"activity_{$i}"} = $profiles[$i]->activity;
+		${"avatar_{$i}"} = $profiles[$i]->avatar;
+		${"contacts_{$i}"} = $profiles[$i]->contacts;
+		${"uid_{$i}"} = $profiles[$i]->uid;
+		${"username_{$i}"} = $profiles[$i]->username;
+		$i++;
+	}
+
     $i = 0;
 
-foreach($profiles as $profile){
-		$name = $profiles[$i]->name;
-		$post = $profiles[$i]->post;		
-		$postlikes = $profiles[$i]->postlikes;
-		$message = $profiles[$i]->message;
-		$bio = $profiles[$i]->bio;
-		$status = $profiles[$i]->status;
-		$postcount = $profiles[$i]->postcount;
-		$followers = $profiles[$i]->followers;
-		$activity = $profiles[$i]->activity;
-		$avatar = $profiles[$i]->avatar;
-		$contacts = $profiles[$i]->contacts;
-		$uid = $profiles[$i]->uid;
-		$username = $profiles[$i]->username;
-		$i++;		
-}
-
-    while ($i < $amt) {
+	foreach($profiles as $profile){
 		$postid = 'postid_'.$i.'';
+		$name = ${"name_{$i}"};
+		$feed = ${"feed_{$i}"};	
+		$post = ${"post_{$i}"};		
+		$postLikes = ${"postLikes_{$i}"};
+		$postDate = ${"postDate_{$i}"};
+		$postTime = ${"postTime_{$i}"};
+		$postLikes = ${"postLikes_{$i}"};		
+		$message = ${"message_{$i}"};
+		$messageDate = ${"messageDate_{$i}"};		
+		$bio = ${"bio_{$i}"};
+		$status = ${"status_{$i}"};
+		$postcount = ${"postcount_{$i}"};
+		$followers = ${"followers_{$i}"};
+		$activity = ${"activity_{$i}"};
+		$avatar = ${"avatar_{$i}"};
+		$contacts = ${"contacts_{$i}"};
+		$uid = ${"uid_{$i}"};
+		$username = ${"username_{$i}"};	
         include("post.php");
         $i++;
     }
@@ -53,17 +76,15 @@ foreach($profiles as $profile){
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">	  
+<link rel="manifest" href="../site.webmanifest">	  
       <link
          href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap"
          rel="stylesheet"
          />
-  <script src="../assets/scripts/svg-inject.min.js"></script>		 
   <!-- post download script -->
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>  
 <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@1.x.x/dist/alpine-clipboard.js"></script>		 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>		 
-       <script src="../assets/scripts/pull-to-reload.js"></script>    
 	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
       <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
       <script src="https://cdn.jsdelivr.net/gh/alpine-collective/alpine-magic-helpers@0.5.x/dist/component.min.js"></script>
@@ -352,21 +373,7 @@ body {
 }
 
 	  </style>
-   <script>
-            var ptr;
 
-            document.addEventListener("DOMContentLoaded", function() {
-                ptr = new PullToReload({ 
-                    'callback-loading': function(){
-                        setTimeout(function(){
-                            ptr.loadingEnd();
-                        }, 3000);
-                    }
-                });
-                
-            });
-
-        </script>
    </head>
 
 
@@ -475,7 +482,7 @@ window.onscroll = function() {
                         <div class="relative" x-data="{ open: false }">
                             <button :aria-expanded="open ? 'true' : 'false'" @click="open = !open" aria-haspopup="true" class="block p-2 transition-opacity duration-200 rounded-full focus:outline-none" type="button" aria-expanded="false">
                                 <span class="sr-only">Contacts menu</span>
-                                <img alt="Daiyaan Ijaz" class="w-10 h-10 rounded-full"  src="https://media-exp1.licdn.com/dms/image/C4E03AQHAR1PhrwJzmg/profile-displayphoto-shrink_100_100/0/1603263069216?e=1618444800&amp;v=beta&amp;t=dFbdkrNHu3aTTc8BqAeQUqN6GQYcyYqaQncAQR_053g" onload="SVGInject(this)">
+                                <img alt="Daiyaan Ijaz" class="w-10 h-10 rounded-full"  src="https://media-exp1.licdn.com/dms/image/C4E03AQHAR1PhrwJzmg/profile-displayphoto-shrink_100_100/0/1603263069216?e=1618444800&amp;v=beta&amp;t=dFbdkrNHu3aTTc8BqAeQUqN6GQYcyYqaQncAQR_053g"">
                             </button>
 
                             <!-- Contacts dropdown menu -->
@@ -532,7 +539,7 @@ for ( var i = 0, len = elms.length; i < len; i++ ) {
 		
 		
 <div  class="mt-6">
-<?php post(6);?>
+<?php post();?>
 </div>
 <div
 	x-data="noticesHandler()"
@@ -791,9 +798,7 @@ saveCapture(element, postid, scrollPos)
 
     };
 </script>
-  <script>
-    SVGInject(document.querySelectorAll("img.injectable"));
-  </script>
+
   
 
   
