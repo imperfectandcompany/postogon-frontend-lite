@@ -5,7 +5,7 @@
 
 			<?php 
 			if(!empty($avatar)){
-				echo "<img src='../assets/img/avatars/{$avatar}.png'";;
+				echo "<img src='../assets/img/avatars/{$avatar}.png'";
 			} else {
 			echo "<div";
 			}?>
@@ -23,7 +23,6 @@
 			} else {
 			echo "<div class='my-1 select-none'>?</div> </div>";
 			}?>
-			
 			<div class="absolute mt-6 ml-4 shadow-lg z-10 inset-y-1 text-center" x-show="open" x-transition:enter="transition duration-200 ease-in-out transform" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition-all transform ease-in duration-300" x-transition:leave-start="translate-y-0 opacity-100 scale-100" x-transition:leave-end="translate-y-full opacity-0 scale-95" style="display: none;">
 	  <div class='bg-white shadow rounded'>           
 		   <div class='mr-2 ml-2'>
@@ -145,6 +144,11 @@
   </p>
 		 </div>
 		 
+		 	<div class="flex flex-row">
+			<span class="absolute animate-ping rounded-full h-2 w-2 mt-1 bg-<?php if($status === "online"){echo "green";} elseif($status === "away"){echo "yellow";} elseif($status === "dnd"){echo "red";} else{echo "gray";}?>-500"></span>
+			<span class="absolute rounded-full h-2 w-2 mt-1 bg-<?php if($status === "online"){echo "green";} elseif($status === "away"){echo "yellow";} elseif($status === "dnd"){echo "red";} else{echo "gray";}?>-500"></span>
+			</div>
+			
             <div class="flex flex-row-reverse">
                <p class="text-xs text-gray-400 transition hover:text-gray-500 mb-4 mr-5"><?php echo $bio;?></p>
             </div>

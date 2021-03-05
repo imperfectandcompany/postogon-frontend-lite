@@ -1,4 +1,8 @@
-
+	<div class="splide">
+    <div class="splide__track">
+        <ul class="splide__list">
+            <li class="splide__slide">
+            <!-- Put the stuff you want to initially slide here -->
 	<div id="<?php echo $postid;?>" style="overflow-hidden h-auto">
 	<div class="bg-white rounded p-2 mb-2 shadow-sm  md:px-4 md:py-4 hidden lg:ml-44 lg:mr-44 xl:ml-96 xl:mr-96 transition  border-6" id="normalpost">
 
@@ -227,3 +231,7 @@ x-on:click="$dispatch('notice', {type: 'like', text: '🤍 Updating'})"
       </div>
 	  </div>
 
+            </li>
+        </ul>
+    </div>
+</div>

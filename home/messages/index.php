@@ -4,22 +4,98 @@ function createpost()
     include_once("topbar.php");
 }
 
-function messages($amt)
+function content($type)
 {
+include('../personas.php');	
+
+
+    $i = 0;
+	
+	foreach($profiles as $profile){
+		${"name_{$i}"} = $profiles[$i]->name;
+		${"feed_{$i}"} = $profiles[$i]->feed;		
+		${"post_{$i}"} = $profiles[$i]->post;
+		${"postLikes_{$i}"} = $profiles[$i]->postLikes;
+		${"postDate_{$i}"} = $profiles[$i]->postDate;
+		${"postTime_{$i}"} = $profiles[$i]->postTime;			
+		${"message_{$i}"} = $profiles[$i]->message;
+		${"messageDate_{$i}"} = $profiles[$i]->messageDate;		
+		${"bio_{$i}"} = $profiles[$i]->bio;
+		${"status_{$i}"} = $profiles[$i]->status;
+		${"postcount_{$i}"} = $profiles[$i]->postcount;
+		${"followers_{$i}"} = $profiles[$i]->followers;
+		${"activity_{$i}"} = $profiles[$i]->activity;
+		${"avatar_{$i}"} = $profiles[$i]->avatar;
+		${"contacts_{$i}"} = $profiles[$i]->contacts;
+		${"uid_{$i}"} = $profiles[$i]->uid;
+		${"username_{$i}"} = $profiles[$i]->username;
+		$i++;
+	}
+
+    $i = 0;	
+if($type==="contacts"){
+		foreach($profiles as $profile){
+		$postid = 'msgid_'.$i.'';
+		$name = ${"name_{$i}"};
+		$feed = ${"feed_{$i}"};	
+		$post = ${"post_{$i}"};		
+		$postLikes = ${"postLikes_{$i}"};
+		$postDate = ${"postDate_{$i}"};
+		$postTime = ${"postTime_{$i}"};
+		$postLikes = ${"postLikes_{$i}"};		
+		$message = ${"message_{$i}"};
+		$messageDate = ${"messageDate_{$i}"};		
+		$bio = ${"bio_{$i}"};
+		$status = ${"status_{$i}"};
+		$postcount = ${"postcount_{$i}"};
+		$followers = ${"followers_{$i}"};
+		$activity = ${"activity_{$i}"};
+		$avatar = ${"avatar_{$i}"};
+		$contacts = ${"contacts_{$i}"};
+		$uid = ${"uid_{$i}"};
+		$username = ${"username_{$i}"};	
+        include("slide1.php");
+        $i++;
+    }	
+}
+
+
+if($type==="messages"){
+
+	
     $i = 0;
 
-    while ($i < $amt) {
+	foreach($profiles as $profile){
         include("skeleton.php");
         $i++;
-    }
-
-    $i = 0;
-
-    while ($i < $amt) {
-		$message = 'msgid_'.$i.'';
+    }	
+	
+    $i = 0;		
+	foreach($profiles as $profile){
+		$postid = 'msgid_'.$i.'';
+		$name = ${"name_{$i}"};
+		$feed = ${"feed_{$i}"};	
+		$post = ${"post_{$i}"};		
+		$postLikes = ${"postLikes_{$i}"};
+		$postDate = ${"postDate_{$i}"};
+		$postTime = ${"postTime_{$i}"};
+		$postLikes = ${"postLikes_{$i}"};		
+		$message = ${"message_{$i}"};
+		$messageDate = ${"messageDate_{$i}"};		
+		$bio = ${"bio_{$i}"};
+		$status = ${"status_{$i}"};
+		$postcount = ${"postcount_{$i}"};
+		$followers = ${"followers_{$i}"};
+		$activity = ${"activity_{$i}"};
+		$avatar = ${"avatar_{$i}"};
+		$contacts = ${"contacts_{$i}"};
+		$uid = ${"uid_{$i}"};
+		$username = ${"username_{$i}"};	
         include("messages.php");
         $i++;
-    }
+    }	
+}
+
 
 }
 ?>
@@ -512,7 +588,34 @@ for ( var i = 0, len = elms.length; i < len; i++ ) {
 		
 		
 <div  class="mt-6">
-<?php messages(1);?>
+      <div class="bg-white md:px-4 md:py-4 transition shadow-none  border-b border-6 " id="normalpost">
+        <div class="flex-grow ">
+		<div class="top-0 sticky z-20  bg-white border-b  border-1 border-gray-200 ">
+            <div class="flex py-4  text-4xl font-bold">Contacts</div>
+
+	<div class="splide">
+    <div class="splide__track">
+        <ul class="splide__list">
+            <li class="splide__slide">
+			<div class="flex flex-1 m-2 mb-6 justify-between text-center">		
+						<?php content("contacts");?>
+			</div>	
+            </li>
+        </ul>
+    </div>
+</div>
+
+			
+			<!-- Search bar -->
+            <div class="p-3">
+                <input class="p-3 w-full bg-gray-200 hover:opacity-75 transition rounded-lg ring-inset focus:outline-none focus:ring-2 focus:ring-yellow-600 focus:opacity-50" type="text" placeholder="Search For Contacts..." />
+            </div>
+			</div>
+						<?php content("messages");?>								
+        </div>
+</div>
+
+
 </div>
 <div
 	x-data="noticesHandler()"
