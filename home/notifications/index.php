@@ -569,7 +569,7 @@ function noticesHandler() {
 			<span class="hidden text-sm capitalize">settings</span>
 		</a>
 
-<a href="." class="flex flex-col flex-grow items-center justify-center
+<a href="../profile/index.php" class="flex flex-col flex-grow items-center justify-center
 			overflow-hidden whitespace-no-wrap text-sm transition-colors
 			duration-100 ease-in-out hover:bg-gray-200 focus:text-orange-500">
 
