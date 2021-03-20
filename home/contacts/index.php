@@ -6,19 +6,8 @@ function topbar()
 
 function request($amt)
 {
-    $i = 0;
-
-    while ($i < $amt) {
-        include("request.php");
-        $i++;
-    }
-
-    $i = 0;
-
-    while ($i < $amt) {
-        include("request.php");
-        $i++;
-    }
+	  include("request.php");
+   
 
 }
 ?>

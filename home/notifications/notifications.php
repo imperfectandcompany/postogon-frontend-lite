@@ -9,7 +9,7 @@
 
 
 <!-- Link to REQUEST PAGE to accept or decline -->
-<a href="">
+<a href="../contacts/index.php">
 <div class= "flex justify-between m-3">
 		
 		
@@ -27,7 +27,7 @@
 		
 		
 		<div class="text-lg font-light md:text-2xl font-light lg:text-4xl ">
-		29
+		8
 		</div>
 		
 		<div class="w-5 h-5 m-1 md:w-7 h-7 lg:w-9 h-9">
