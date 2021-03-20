@@ -1,4 +1,4 @@
-      <div class="bg-white px-4 py-4 m-0 lg:ml-96 lg:mr-96 transition shadow-none md:shadow border-b border-6 " id="normalpost">
+      <div class="bg-gray-100  " id="normalpost">
 
 <body class="bg-gray-100">
 
@@ -104,9 +104,9 @@
 
 <div class ="flex justify-evenly pb-2">
 	<button class="bg-gray-700 text-white font-bold rounded-lg p-1" type="button">Posts</button>
-	<button class="bg-gray-100 font-bold rounded-lg p-1" type="button">Gallery</button>
-	<button class="bg-gray-100 font-bold rounded-lg p-1" type="button">Circles</button>
-	<button class="bg-gray-100 font-bold rounded-lg p-1" type="button">Likes</button>
+	<button class=" font-bold rounded-lg p-1" type="button">Gallery</button>
+	<button class=" font-bold rounded-lg p-1" type="button">Circles</button>
+	<button class=" font-bold rounded-lg p-1" type="button">Likes</button>
 
 
 </div>
